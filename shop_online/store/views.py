@@ -121,6 +121,11 @@ def product_list(request):
     category_name = request.GET.get('category')
     query = request.GET.get('q', '')
 
+
+    # Fetch all categories
+    categories = Category.objects.all()
+
+    
     # Filters for price range
     if price_range:
         if price_range == '0-100':

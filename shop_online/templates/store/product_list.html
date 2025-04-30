@@ -18,7 +18,7 @@
     <div style="margin-top: 20px;">
         <form method="get" style="display: flex; justify-content: center; gap: 15px;">
             {% if request.GET.q %}<input type="hidden" name="q" value="{{ request.GET.q }}">{% endif %}
-
+    
             <!-- Filtru Preț -->
             <select name="price_range" style="padding: 6px 10px;">
                 <option value="">All Prices</option>
@@ -27,23 +27,29 @@
                 <option value="500-1000" {% if request.GET.price_range == '500-1000' %}selected{% endif %}>$500-$1000</option>
                 <option value="1000+" {% if request.GET.price_range == '1000+' %}selected{% endif %}>$1000+</option>
             </select>
-
+    
             <!-- Filtru Stoc -->
             <select name="stock" style="padding: 6px 10px;">
                 <option value="">All Stock</option>
                 <option value="in_stock" {% if request.GET.stock == 'in_stock' %}selected{% endif %}>In Stock</option>
                 <option value="low_stock" {% if request.GET.stock == 'low_stock' %}selected{% endif %}>Low Stock</option>
             </select>
-
+    
+            <!-- Filtru Categorie Type -->
+            <select name="category" style="padding: 6px 10px;">
+                <option value="">All Categories</option>
+                <option value="Electronics" {% if request.GET.category == 'Electronics' %}selected{% endif %}>Electronics</option>
+                <option value="Electrics" {% if request.GET.category == 'Electrics' %}selected{% endif %}>Electrics</option>
+            </select>
+    
             <!-- Buton Filtru -->
             <button type="submit" style="padding: 6px 12px;">Filter</button>
-
-            {% if request.GET.price_range or request.GET.stock %}
+    
+            {% if request.GET.price_range or request.GET.stock or request.GET.category %}
                 <a href="?{% if request.GET.q %}q={{ request.GET.q }}{% endif %}" style="padding: 6px 12px; background: #f0f0f0; text-decoration: none;">Reset</a>
             {% endif %}
         </form>
     </div>
-</div>
 
     <!-- Lista de produse -->
     <div class="products-list">
