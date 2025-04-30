@@ -2,7 +2,7 @@
 
 {% block content %}
     {% if weather %}
-    <div class="weather-info" style="background-color: #fff; padding: 20px; border-radius: 10px; box-shadow: 0 0 10px rgba(0,0,0,0.1); margin-bottom: 30px;">
+    <div class="weather-info" style="background-color: #44ecf89e; padding: 20px; border-radius: 10px; box-shadow: 0 0 10px rgba(0,0,0,0.1); margin-bottom: 30px;">
         <h2 style="margin-bottom: 10px;">Weather in {{ weather.city }}</h2> 
         <p><strong>🌡️ Temperature:</strong> {{ weather.temperature }} °C</p>
         <p><strong>🌤️ Description:</strong> {{ weather.description }}</p>
@@ -14,9 +14,12 @@
         <p style="color: red;">Weather error: {{ weather_error }}</p>
     {% endif %}
 
-    <h1>
-        Welcome to our Electric & Electronic Online Store{% if user.is_authenticated %}, {{ user.username }}!{% else %}!{% endif %}
-    </h1>
-
-    <p>Browse our products and enjoy shopping!</p>
+    <div class="home-welcome">
+        <h1>
+            Welcome to our Electric & Electronic Online Store{% if user.is_authenticated %}, {{ user.username }}!{% else %}!{% endif %}
+        </h1>
+    
+        <p>Browse our products and enjoy shopping!</p>
+    </div>
+    
 {% endblock %}

@@ -15,15 +15,19 @@
             <a href="{% url 'store:home' %}" class="nav-logo" aria-label="Home">
                 <img src="{% static 'store/images/logo_rev1.png' %}" alt="Store Logo" width="150">
             </a>
-
-            <div class="hamburger" onclick="toggleMenu()">&#9776;</div>
-
+        
+            <div class="hamburger" onclick="toggleMenu(this)">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        
             <ul class="navbar-menu" id="navbarMenu">
                 <li><a href="{% url 'store:home' %}" aria-label="Home">Home</a></li>
                 <li><a href="{% url 'store:product_list' %}" aria-label="Products">Products</a></li>
                 {% if user.is_authenticated %}
                     <li><a href="{% url 'store:cart_view' %}" aria-label="Cart">Cart</a></li>
-                    <li class="welcome-message">Welcome, {{ user.username }}!</li>
+                    
                     <li><a href="javascript:void(0);" class="logout-btn" onclick="confirmLogout()" aria-label="Logout">Log Out</a></li>
                 {% else %}
                     <li><a href="{% url 'store:signup' %}" aria-label="Sign Up">Sign Up</a></li>
@@ -31,10 +35,24 @@
                 {% endif %}
                 <li><a href="{% url 'store:contact' %}" aria-label="Contact">Contact</a></li>
             </ul>
+        
+            {% if user.is_authenticated %}
+            <div class="welcome-message">
+                Welcome, {{ user.username }}!
+            </div>
+            {% endif %}
         </div>
     </nav>
 
+    <script>
+        // Funcția care va activa/dezactiva meniul și animația hamburgerului
+        function toggleMenu(el) {
+            const menu = document.getElementById("navbarMenu"); // Meniul
+            menu.classList.toggle("show"); // Activează sau dezactivează meniul
     
+            el.classList.toggle("active"); // Activează sau dezactivează animația hamburgerului
+        }
+    </script>
 
     <main class="content-container">
         {% block content %}{% endblock %}
@@ -72,11 +90,7 @@
             return true;
         }
 
-        function toggleMenu() {
-            var menu = document.getElementById("navbarMenu");
-            menu.classList.toggle("show");
-        }
-
+        
         // Auto logout after 30 minutes of inactivity
         var logoutTime = 1800000; // 30 minutes in milliseconds
         var timeout;

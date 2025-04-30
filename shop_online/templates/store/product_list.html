@@ -2,28 +2,48 @@
 {% load static %}
 
 {% block content %}
+
+<!-- Contenitor pentru formularele de căutare și filtre -->
+<div class="search-filter-container" style="text-align: center;">
+    <form method="get" style="display: flex; justify-content: space-between; align-items: center; gap: 10px; flex-wrap: wrap;">
+        
+        <!-- Căutare -->
+        <input type="text" name="q" class="search-input" placeholder="Search products..." value="{{ request.GET.q }}" style="padding: 6px 10px;">
+
+        <!-- Buton Căutare -->
+        <button type="submit" class="search-button" style="padding: 6px 10px;">Search</button>
+    </form>
+
     <!-- Filtre -->
-    <div style="margin: 0 0 25px 0; text-align: center;">
-        <form method="get" style="display: inline-block;">
+    <div style="margin-top: 20px;">
+        <form method="get" style="display: flex; justify-content: center; gap: 15px;">
             {% if request.GET.q %}<input type="hidden" name="q" value="{{ request.GET.q }}">{% endif %}
-            <select name="price_range" style="padding: 6px 10px; margin-right: 8px;">
+
+            <!-- Filtru Preț -->
+            <select name="price_range" style="padding: 6px 10px;">
                 <option value="">All Prices</option>
                 <option value="0-100" {% if request.GET.price_range == '0-100' %}selected{% endif %}>$0-$100</option>
                 <option value="100-500" {% if request.GET.price_range == '100-500' %}selected{% endif %}>$100-$500</option>
                 <option value="500-1000" {% if request.GET.price_range == '500-1000' %}selected{% endif %}>$500-$1000</option>
                 <option value="1000+" {% if request.GET.price_range == '1000+' %}selected{% endif %}>$1000+</option>
             </select>
-            <select name="stock" style="padding: 6px 10px; margin-right: 8px;">
+
+            <!-- Filtru Stoc -->
+            <select name="stock" style="padding: 6px 10px;">
                 <option value="">All Stock</option>
                 <option value="in_stock" {% if request.GET.stock == 'in_stock' %}selected{% endif %}>In Stock</option>
                 <option value="low_stock" {% if request.GET.stock == 'low_stock' %}selected{% endif %}>Low Stock</option>
             </select>
-            <button type="submit" style="padding: 6px 12px; margin-right: 8px;">Filter</button>
+
+            <!-- Buton Filtru -->
+            <button type="submit" style="padding: 6px 12px;">Filter</button>
+
             {% if request.GET.price_range or request.GET.stock %}
                 <a href="?{% if request.GET.q %}q={{ request.GET.q }}{% endif %}" style="padding: 6px 12px; background: #f0f0f0; text-decoration: none;">Reset</a>
             {% endif %}
         </form>
     </div>
+</div>
 
     <!-- Lista de produse -->
     <div class="products-list">
