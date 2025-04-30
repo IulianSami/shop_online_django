@@ -1,0 +1,56 @@
+{% extends 'store/base.html' %}
+
+{% block content %}
+    <h1>Your Cart</h1>
+
+
+    {% if messages %}
+    {% for message in messages %}
+        <div style="padding: 10px; background: #ddf0d8; border: 1px solid #90c290; margin-bottom: 10px;">
+            {{ message }}
+        </div>
+    {% endfor %}
+{% endif %}
+
+
+
+
+    {% if items %}
+        <ul>
+            {% for item in items %}
+                <li>
+                    {{ item.product.name }} - ${{ item.product.price }} 
+                    <strong>Total: ${{ item.get_total_price }}</strong>
+
+                    <!-- Form for update quantity -->
+                    <form action="{% url 'store:update_cart' item.id %}" method="POST">
+                        {% csrf_token %}
+                        <label for="quantity_{{ item.id }}">Cantitate:</label>
+                        <input type="number" name="quantity" id="quantity_{{ item.id }}" value="{{ item.quantity }}" min="1" max="{{ item.product.stock }}" required>
+                        <button type="submit">Update</button>
+                    </form>
+
+                    <!-- Form delete product from Cart -->
+                    <form action="{% url 'store:remove_from_cart' item.id %}" method="post">
+                        {% csrf_token %}
+                        <button type="submit" class="btn-danger">Remove</button>
+                    </form>
+                </li>
+            {% endfor %}
+        </ul>
+
+        <h3>Total: ${{ total }}</h3>
+
+        {% if has_zero_stock %}
+            <p style="color: red;">Cannot proceed to checkout. One or more items are out of stock.</p>
+        {% else %}
+            <!-- Form for go to checkout -->
+            <form action="{% url 'store:checkout' %}" method="GET">
+                <button type="submit">Proceed to Checkout</button>
+            </form>
+        {% endif %}
+
+    {% else %}
+        <p>Your cart is empty!</p>
+    {% endif %}
+{% endblock %}

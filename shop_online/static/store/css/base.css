@@ -1,0 +1,486 @@
+/* Reset default browser styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+/* Set base styles for the body */
+body {
+    font-family: 'Poppins', sans-serif;
+    line-height: 1.6;
+    background-image: url("/static/store/images/background.jpg");
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    color: #333;
+    padding: 20px;
+    min-height: 100vh;
+}
+
+/* Define color palette as CSS variables */
+:root {
+    --primary-color: #007bff;
+    --secondary-color: #ff3366;
+    --success-color: #28a745;
+    --error-color: #dc3545;
+    --dark-text-color: #222222;
+    --light-text-color: #ffffff;
+    --background-light: #f9f9f9;
+    --background-dark: #222222;
+}
+
+/* Navigation bar styles */
+nav {
+    background: linear-gradient(to right, var(--primary-color), #00c6ff);
+    padding: 8px 20px;
+    position: sticky;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    border-radius: 10px 10px 0 0;
+    display: flex;
+    align-items: center;
+}
+
+/* Logo inside the navbar */
+nav .nav-logo {
+    height: 100px; 
+    margin-right: 20px;
+    transition: transform 0.3s ease;
+}
+
+nav .nav-logo img {
+    height: 100%; 
+    width: auto;
+    max-height: 100px; 
+    object-fit: contain;
+    transition: transform 0.3s ease;
+}
+
+/* Container for nav links */
+.nav-links {
+    display: flex;
+    flex-grow: 1;
+    justify-content: center;
+}
+
+/* Navigation links list */
+nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: nowrap;
+}
+
+/* Individual nav item styling */
+nav ul li {
+    margin-right: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Nav link button styles */
+nav ul li a {
+    color: rgb(206, 216, 232);
+    text-decoration: none;
+    padding: 10px 20px;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: all 0.3s ease;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    height: 40px;
+}
+
+/* Hover effect on nav links */
+nav ul li a:hover {
+    color: white;
+    background-color: var(--secondary-color);
+    transform: translateY(-3px);
+}
+
+/* Background effect on hover */
+nav ul li a::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: var(--secondary-color);
+    border-radius: 5px;
+    z-index: -1;
+    transition: all 0.3s ease;
+    transform: scaleX(0);
+    transform-origin: center;
+}
+
+nav ul li a:hover::before {
+    transform: scaleX(1);
+}
+
+/* Product list styles */
+.products-list {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+
+/* Product card styles */
+.product-item {
+    border: 2px solid var(--primary-color);
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 20px;
+    background-color: #ffffff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    width: calc(33.333% - 20px);
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+
+.product-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+/* Product image styles */
+.product-item img {
+    width: 100%;
+    height: 200px;
+    object-fit: contain;
+    margin-bottom: 15px;
+    border-radius: 5px;
+}
+
+/* "Add to cart" button */
+.add-to-cart-btn {
+    margin-top: auto;
+    padding: 10px 20px;
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1em;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.add-to-cart-btn:hover {
+    background-color: #0056b3;
+    transform: translateY(-3px);
+}
+
+/* Signup form container */
+.signup-container {
+    max-width: 600px;
+    margin: 50px auto;
+    padding: 30px;
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+}
+
+.signup-container h1 {
+    font-size: 2em;
+    text-align: center;
+    margin-bottom: 25px;
+    color: var(--primary-color);
+}
+
+/* Search bar layout */
+.search-form {
+    display: flex;
+    justify-content: center;
+    margin: 30px 0;
+    width: 100%;
+}
+
+.search-input {
+    padding: 12px 20px;
+    font-size: 16px;
+    width: 60%;
+    border-radius: 25px 0 0 25px;
+    border: 1px solid #ccc;
+    outline: none;
+    transition: border-color 0.3s;
+}
+
+.search-input:focus {
+    border-color: var(--primary-color);
+}
+
+.search-button {
+    padding: 12px 20px;
+    font-size: 16px;
+    background-color: var(--primary-color);
+    color: white;
+    border-radius: 0 25px 25px 0;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.search-button:hover {
+    background-color: #0056b3;
+}
+
+
+/* Responsive design: tablets and smaller */
+@media (max-width: 768px) {
+    body {
+        background-image: url('/static/store/images/background.jpg');
+        background-color: var(--background-light);
+        padding: 10px;
+    }
+
+    nav {
+        flex-direction: column;
+        padding: 10px;
+        position: relative;
+    }
+
+    .nav-logo {
+        margin: 0 auto 10px;
+        height: 35px;
+    }
+
+    .nav-links {
+        width: 100%;
+    }
+
+    nav ul {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    nav ul li {
+        margin-right: 0;
+        margin-bottom: 8px;
+        width: 100%;
+    }
+
+    nav ul li a {
+        width: 100%;
+        justify-content: center;
+        padding: 8px;
+    }
+
+    .products-list {
+        flex-direction: column;
+    }
+
+    .product-item {
+        width: 100%;
+    }
+
+    .search-form {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .search-input {
+        width: 100%;
+        border-radius: 25px;
+        margin-bottom: 10px;
+    }
+
+    .search-button {
+        width: 100%;
+        border-radius: 25px;
+    }
+}
+
+/* Responsive design: very small screens */
+@media (max-width: 480px) {
+    .nav-logo {
+        height: 30px;
+    }
+
+    .product-item {
+        padding: 15px;
+    }
+
+    .signup-container {
+        padding: 20px;
+        margin: 20px auto;
+    }
+}
+
+/* Accessibility: focus effect */
+a:focus, button:focus, input:focus {
+    outline: 2px solid var(--secondary-color);
+    outline-offset: 2px;
+}
+
+/* Fade-in animation */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.fade-in {
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+/* Truncate product descriptions */
+.product-description {
+    display: -webkit-box;
+    -webkit-line-clamp: 3; 
+    line-clamp: 3; 
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    margin-bottom: 5px;
+}
+
+/* Read more button */
+.read-more {
+    color: var(--primary-color);
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 0.9em;
+    padding: 0;
+    text-decoration: underline;
+}
+
+.read-more:hover {
+    color: var(--secondary-color);
+}
+
+
+/* Weather widget container */
+.weather-container {
+    padding: 20px;
+    max-width: 600px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+#weather-data {
+    font-size: 18px;
+    margin-top: 20px;
+}
+
+#weather-data p {
+    margin: 5px 0;
+}
+
+#weather-data .icon {
+    font-size: 40px;
+    margin-bottom: 10px;
+}
+
+#weather-data .temp {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+
+
+
+
+
+
+/* Hamburger menu - ascuns pe desktop */
+.hamburger {
+    display: none; /* Ascunde hamburgerul pe desktop */
+    font-size: 30px;
+    cursor: pointer;
+    color: white;
+}
+
+/* Meniul este ascuns pe mobil și tabletă */
+.navbar-menu {
+    display: flex;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    justify-content: center;
+    width: 100%;
+}
+
+/* Meniul care se deschide */
+.navbar-menu.show {
+    display: flex;
+    flex-direction: column; /* Aranjează meniul vertical pe mobil/tabletă */
+    background-color: var(--primary-color);
+    width: 100%;
+    position: absolute;
+    top: 50px;
+    left: 0;
+    padding: 10px 0;
+}
+
+/* Stil pentru link-urile din meniu */
+.navbar-menu li {
+    margin: 10px 0;
+    text-align: center;
+}
+
+.navbar-menu li a {
+    color: white;
+    padding: 10px 20px;
+    text-decoration: none;
+    display: block;
+}
+
+/* Hover pentru link-urile din meniu */
+.navbar-menu li a:hover {
+    background-color: var(--secondary-color);
+}
+
+/* Media Query pentru dispozitive mici */
+@media screen and (max-width: 768px) {
+    /* Arată butonul hamburger pe mobil */
+    .hamburger {
+        display: block;
+        color: white;
+    }
+
+    /* Ascunde meniul pe ecrane mici */
+    .navbar-menu {
+        display: none;
+    }
+
+    /* Când meniul este activat, arată-l pe ecran */
+    .navbar-menu.show {
+        display: flex;
+    }
+}
+
+
+/*REVIEW*/
+.product-actions button {
+    margin-top: 10px;
+    padding: 10px;
+    font-size: 16px;
+}
+
+.reviews-container {
+    margin-top: 20px;
+}
+
+.review-item {
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+}

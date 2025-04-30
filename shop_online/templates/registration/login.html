@@ -1,0 +1,21 @@
+{% extends 'store/base.html' %}
+
+{% block content %}
+<h1>Login</h1>
+
+<!-- Form of  authenticity-->
+<form method="post">
+    {% csrf_token %}
+    <!-- Form view  -->
+    {{ form.as_p }}
+
+   
+
+    <!-- Buton submit -->
+    <button type="submit">Log In</button>
+</form>
+
+<!-- Link for Sign Up -->
+<p>Don't have an account? <a href="{% url 'signup' %}">Sign up here</a>.</p>
+
+{% endblock %}

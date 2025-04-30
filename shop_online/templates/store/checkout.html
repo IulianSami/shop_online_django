@@ -1,0 +1,28 @@
+<!-- store/templates/store/checkout.html -->
+
+{% extends 'store/base.html' %}
+
+{% block content %}
+    <h1>Checkout</h1>
+
+    <h3>Your Cart:</h3>
+    {% if items %}
+        <ul>
+            {% for item in items %}
+                <li>
+                    {{ item.product.name }} - {{ item.quantity }} x ${{ item.product.price }}
+                    <strong>Total: ${{ item.get_total_price }}</strong>
+                </li>
+            {% endfor %}
+        </ul>
+        <h3>Total: ${{ total }}</h3>
+
+        <!-- Form for order confirmation -->
+        <form action="{% url 'store:place_order' %}" method="POST">
+            {% csrf_token %}
+            <button type="submit">Confirm Order</button>
+        </form>
+    {% else %}
+        <p>Your cart is empty!</p>
+    {% endif %}
+{% endblock %}

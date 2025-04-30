@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Online Store{% endblock %}</title>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'store/css/base.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="icon" href="{% static 'store/images/favicon.ico' %}" type="image/x-icon">
+</head>
+<body>
+    <nav>
+        <div class="navbar-container">
+            <a href="{% url 'store:home' %}" class="nav-logo" aria-label="Home">
+                <img src="{% static 'store/images/logo.png' %}" alt="Store Logo" width="150">
+            </a>
+
+            <div class="hamburger" onclick="toggleMenu()">&#9776;</div>
+
+            <ul class="navbar-menu" id="navbarMenu">
+                <li><a href="{% url 'store:home' %}" aria-label="Home">Home</a></li>
+                <li><a href="{% url 'store:product_list' %}" aria-label="Products">Products</a></li>
+                {% if user.is_authenticated %}
+                    <li><a href="{% url 'store:cart_view' %}" aria-label="Cart">Cart</a></li>
+                    <li class="welcome-message">Welcome, {{ user.username }}!</li>
+                    <li><a href="javascript:void(0);" class="logout-btn" onclick="confirmLogout()" aria-label="Logout">Log Out</a></li>
+                {% else %}
+                    <li><a href="{% url 'store:signup' %}" aria-label="Sign Up">Sign Up</a></li>
+                    <li><a href="{% url 'store:login' %}" aria-label="Login">Login</a></li>
+                {% endif %}
+                <li><a href="{% url 'store:contact' %}" aria-label="Contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="weather-container">
+        {% include 'store/weather.html' %}
+    </div>
+
+    <main class="content-container">
+        {% block content %}{% endblock %}
+    </main>
+
+    {% if messages %}
+    <div class="messages">
+        {% for message in messages %}
+            <div class="alert">{{ message }}</div>
+        {% endfor %}
+    </div>
+    {% endif %}
+
+    <script>
+        // Ascunde mesajul de eroare inițial
+        document.addEventListener('DOMContentLoaded', function() {
+            var error = document.getElementById('error-message');
+            if (error) error.style.display = 'none';
+        });
+
+        function confirmLogout() {
+            if (confirm("Are you sure you want to log out?")) {
+                window.location.href = "{% url 'store:logout' %}";
+            }
+        }
+
+        function validateSearch() {
+            const searchInput = document.getElementById('search-input');
+            const errorMessage = document.getElementById('error-message');
+
+            if (searchInput.value.trim() === "") {
+                errorMessage.style.display = "block";
+                return false;
+            }
+            return true;
+        }
+
+        function toggleMenu() {
+            var menu = document.getElementById("navbarMenu");
+            menu.classList.toggle("show");
+        }
+
+        // Auto logout after 30 minutes of inactivity
+        var logoutTime = 1800000; // 30 minutes in milliseconds
+        var timeout;
+        function resetTimer() {
+            clearTimeout(timeout);
+            timeout = setTimeout(function () {
+                window.location.href = "{% url 'login' %}";
+            }, logoutTime);
+        }
+        document.onmousemove = resetTimer;
+        document.onkeydown = resetTimer;
+        resetTimer();
+    </script>
+
+        
+
+</body>
+</html>

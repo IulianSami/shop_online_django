@@ -1,0 +1,155 @@
+{% extends 'store/base.html' %}
+{% load static %}
+
+{% block content %}
+    <!-- Filtre -->
+    <div style="margin: 0 0 25px 0; text-align: center;">
+        <form method="get" style="display: inline-block;">
+            {% if request.GET.q %}<input type="hidden" name="q" value="{{ request.GET.q }}">{% endif %}
+            <select name="price_range" style="padding: 6px 10px; margin-right: 8px;">
+                <option value="">All Prices</option>
+                <option value="0-100" {% if request.GET.price_range == '0-100' %}selected{% endif %}>$0-$100</option>
+                <option value="100-500" {% if request.GET.price_range == '100-500' %}selected{% endif %}>$100-$500</option>
+                <option value="500-1000" {% if request.GET.price_range == '500-1000' %}selected{% endif %}>$500-$1000</option>
+                <option value="1000+" {% if request.GET.price_range == '1000+' %}selected{% endif %}>$1000+</option>
+            </select>
+            <select name="stock" style="padding: 6px 10px; margin-right: 8px;">
+                <option value="">All Stock</option>
+                <option value="in_stock" {% if request.GET.stock == 'in_stock' %}selected{% endif %}>In Stock</option>
+                <option value="low_stock" {% if request.GET.stock == 'low_stock' %}selected{% endif %}>Low Stock</option>
+            </select>
+            <button type="submit" style="padding: 6px 12px; margin-right: 8px;">Filter</button>
+            {% if request.GET.price_range or request.GET.stock %}
+                <a href="?{% if request.GET.q %}q={{ request.GET.q }}{% endif %}" style="padding: 6px 12px; background: #f0f0f0; text-decoration: none;">Reset</a>
+            {% endif %}
+        </form>
+    </div>
+
+    <!-- Lista de produse -->
+    <div class="products-list">
+        {% for product in page_obj %}
+        <div class="product-item" aria-label="Product: {{ product.name }}">
+            <div class="product-image-container">
+                <img src="{% if product.image %}{{ product.image.url }}{% else %}{% static 'store/images/placeholder.png' %}{% endif %}" alt="{{ product.name }}" loading="lazy">
+            </div>
+            <div class="product-content">
+                <h3>{{ product.name }}</h3>
+                <div class="description-container">
+                    <div class="product-description" id="desc-{{ product.id }}">
+                        {{ product.description }}
+                    </div>
+                    {% if product.description|length > 150 %}
+                        <button class="read-more-btn" onclick="toggleDescription('desc-{{ product.id }}', this)">
+                            <span class="show-more">Read More</span>
+                            <span class="show-less" style="display:none">Show Less</span>
+                        </button>
+                    {% endif %}
+                </div>
+                <div class="price-stock">
+                    <span class="current-price">Price: ${{ product.price }}</span>
+                    <span class="stock-info">Stock: {{ product.stock }} pcs</span>
+                </div>
+
+                <!-- Footer produs -->
+                <div class="product-footer">
+                    {% if user.is_authenticated %}
+                        <form action="{% url 'store:add_to_cart' product.id %}" method="post">
+                            {% csrf_token %}
+                            <button type="submit" class="add-to-cart-btn">
+                                Add to Cart
+                            </button>
+                        </form>
+
+                        {% if product.id in has_purchased %}
+                            <a href="{% url 'store:product_detail' product.id %}" class="btn btn-secondary">
+                                Leave a Review!
+                            </a>
+                        {% endif %}
+                    {% else %}
+                        <a href="{% url 'store:login' %}?next={{ request.path }}" class="login-prompt">Log in to purchase!</a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        {% empty %}
+            <p class="no-products">No products found.</p>
+        {% endfor %}
+    </div>
+
+    {% if page_obj.paginator.num_pages > 1 %}
+    <div class="pagination">
+        <span class="step-links">
+            {% if page_obj.has_previous %}
+                <a href="?page=1&q={{ request.GET.q }}{% if request.GET.price_range %}&price_range={{ request.GET.price_range }}{% endif %}{% if request.GET.stock %}&stock={{ request.GET.stock }}{% endif %}">&laquo; first</a>
+                <a href="?page={{ page_obj.previous_page_number }}&q={{ request.GET.q }}{% if request.GET.price_range %}&price_range={{ request.GET.price_range }}{% endif %}{% if request.GET.stock %}&stock={{ request.GET.stock }}{% endif %}">previous</a>
+            {% endif %}
+            <span class="current">
+                Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+            </span>
+            {% if page_obj.has_next %}
+                <a href="?page={{ page_obj.next_page_number }}&q={{ request.GET.q }}{% if request.GET.price_range %}&price_range={{ request.GET.price_range }}{% endif %}{% if request.GET.stock %}&stock={{ request.GET.stock }}{% endif %}">next</a>
+                <a href="?page={{ page_obj.paginator.num_pages }}&q={{ request.GET.q }}{% if request.GET.price_range %}&price_range={{ request.GET.price_range }}{% endif %}{% if request.GET.stock %}&stock={{ request.GET.stock }}{% endif %}">last &raquo;</a>
+            {% endif %}
+        </span>
+    </div>
+    {% endif %}
+
+    <style>
+        .product-description {
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            margin-bottom: 8px;
+            line-height: 1.4;
+        }
+
+        .read-more-btn {
+            background: none;
+            border: none;
+            color: #007bff;
+            cursor: pointer;
+            padding: 0;
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+
+        .read-more-btn:hover {
+            text-decoration: underline;
+        }
+
+        .price-stock {
+            margin: 10px 0;
+            font-weight: bold;
+        }
+
+        .current-price {
+            color: #d32f2f;
+            margin-right: 15px;
+        }
+
+        .stock-info {
+            color: #388e3c;
+        }
+    </style>
+
+    <script>
+        function toggleDescription(descId, button) {
+            const desc = document.getElementById(descId);
+            const showMore = button.querySelector('.show-more');
+            const showLess = button.querySelector('.show-less');
+            
+            if (desc.style.webkitLineClamp === '3') {
+                desc.style.webkitLineClamp = 'unset';
+                showMore.style.display = 'none';
+                showLess.style.display = 'inline';
+            } else {
+                desc.style.webkitLineClamp = '3';
+                showMore.style.display = 'inline';
+                showLess.style.display = 'none';
+            }
+        }
+    </script>
+{% endblock %}

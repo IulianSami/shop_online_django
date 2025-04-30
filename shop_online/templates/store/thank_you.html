@@ -1,0 +1,8 @@
+<!-- store/templates/store/thank_you.html -->
+{% extends 'store/base.html' %}
+
+{% block content %}
+  <h1>Thank you for your order!</h1>
+  <p>Your order has been successfully placed. We will deliver it soon. 😊</p>
+  <a href="{% url 'store:product_list' %}">Back to products</a>
+{% endblock %}

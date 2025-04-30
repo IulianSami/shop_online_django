@@ -1,0 +1,81 @@
+{% extends 'store/base.html' %}
+
+{% block title %}{{ product.name }}{% endblock %}
+
+{% block content %}
+    <h2>{{ product.name }}</h2>
+    <p>{{ product.description }}</p>
+    <p><strong>Price:</strong> ${{ product.price }}</p>
+
+    <!-- Button add to cart -->
+    <div class="product-actions">
+        <form method="POST" action="{% url 'store:add_to_cart' product.id %}">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-primary">Add to Cart</button>
+        </form>
+    </div>
+
+    <h3>Leave a Review</h3>
+    <form method="POST">
+        {% csrf_token %}
+        <label for="rating">Rating:</label>
+        <input type="number" id="rating" name="rating" min="1" max="5" required>
+        <label for="text">Review Text:</label>
+        <textarea id="text" name="text" required></textarea>
+        <button type="submit">Submit Review</button>
+    </form>
+
+    <h3>Reviews</h3>
+    {% for review in reviews %}
+        <div class="review">
+            <p><strong>{{ review.user.username }}</strong> - Rating: {{ review.rating }} stars</p>
+            <p>{{ review.text }}</p>
+            
+            <!-- Time from creating review -->
+            <p class="review-time" data-time="{{ review.created_at|date:"Y-m-d H:i:s" }}">
+                {% load tz %} 
+                {{ review.created_at|date:"F j, Y, g:i a"|timezone:"Europe/Bucharest" }}
+            </p>
+        </div>
+    {% empty %}
+        <p>No reviews yet.</p>
+    {% endfor %}
+    
+    <!-- Script for calculating time review -->
+    <script>
+        function timeAgo(time) {
+            const now = new Date();
+            const diffInSeconds = (now - time) / 1000; // Difference in seconds
+
+            if (diffInSeconds < 60) {
+                return "Few seconds ago";
+            }
+
+            const diffInMinutes = diffInSeconds / 60;
+            if (diffInMinutes < 60) {
+                return `Now ${Math.floor(diffInMinutes)} minutes ago`;
+            }
+
+            const diffInHours = diffInMinutes / 60;
+            if (diffInHours < 24) {
+                return `Now ${Math.floor(diffInHours)} hours ago`;
+            }
+
+            const diffInDays = diffInHours / 24;
+            if (diffInDays < 2) {
+                return `Yesterday ${time.getHours()}:${time.getMinutes()}`;
+            }
+
+            return `${time.getDate()} ${time.toLocaleString('default', { month: 'long' })} ${time.getFullYear()} la ${time.getHours()}:${time.getMinutes()}`;
+        }
+
+        window.onload = function () {
+            const reviewTimes = document.querySelectorAll('.review-time');
+            reviewTimes.forEach(function (reviewTimeElement) {
+                const timeString = reviewTimeElement.getAttribute('data-time');
+                const reviewTime = new Date(timeString);
+                reviewTimeElement.innerText = timeAgo(reviewTime);
+            });
+        };
+    </script>
+{% endblock %}

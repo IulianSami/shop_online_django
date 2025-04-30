@@ -1,0 +1,199 @@
+/* Resetare stiluri implicite */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    line-height: 1.6;
+    background-image: url("/static/store/images/background.jpg"); /* Fundalul tău */
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    color: #333; /* Culoare de text închis pentru citire ușoară */
+    padding: 20px;
+}
+
+/* Paleta de culori */
+:root {
+    --primary-color: #007bff;
+    --secondary-color: #ff3366;
+    --success-color: #28a745;
+    --error-color: #dc3545;
+    --dark-text-color: #222222;
+    --light-text-color: #ffffff;
+    --background-light: #f9f9f9;
+    --background-dark: #222222;
+}
+
+/* Titluri */
+h1, h2, h3 {
+    font-family: 'Poppins', sans-serif;
+    color: var(--dark-text-color);
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2); /* Umbra subtile pentru titluri */
+}
+
+/* Stilizare lista produse */
+ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+li {
+    border: 2px solid var(--primary-color);
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 20px;
+    background-color: #ffffff; /* Fundal alb pentru carduri */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Umbra subtilă */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+li:hover {
+    transform: translateY(-5px); /* Ridicare la hover */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Umbra mai puternică */
+}
+
+/* Efecte hover pe imagini */
+li:hover img {
+    transform: scale(1.1); /* Mărire ușoară la hover */
+}
+
+/* Navbar */
+nav {
+    background: linear-gradient(to right, var(--primary-color), #00c6ff); /* Gradient de albastru */
+    padding: 15px 0;
+    position: sticky;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* Umbra mai puternică pe navbar */
+    border-radius: 10px 10px 0 0; /* Colțuri rotunjite sus */
+}
+
+nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+nav ul li {
+    margin-right: 30px;
+}
+
+nav ul li a {
+    color: white;
+    text-decoration: none;
+    padding: 12px 20px;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    border-radius: 5px;
+}
+
+nav ul li a:hover {
+    background-color: var(--secondary-color); /* Roz la hover */
+    transform: translateY(-3px);
+}
+
+/* Titlu H1 */
+h1 {
+    font-size: 3em;
+    font-weight: bold;
+    color: var(--light-text-color); /* Text alb pentru contrast pe fundal închis */
+    text-align: center;
+    margin-top: 50px;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3); /* Umbra mai puternică pentru vizibilitate */
+}
+
+/* Stilizare formulare */
+.signup-container {
+    max-width: 600px;
+    margin: 50px auto;
+    padding: 30px;
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+}
+
+.signup-container h1 {
+    font-size: 2em;
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+/* Inputuri și butoane */
+input[type="text"], input[type="password"], input[type="email"] {
+    width: 100%;
+    padding: 14px;
+    margin: 12px 0;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 1.2em;
+}
+
+input[type="text"]:focus, input[type="password"]:focus, input[type="email"]:focus {
+    border-color: var(--primary-color);
+    outline: none;
+}
+
+.btn-signup {
+    width: 100%;
+    padding: 14px;
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.2em;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btn-signup:hover {
+    background-color: #0056b3; /* Culoare mai închisă la hover */
+}
+
+/* Mesajele de eroare și succes */
+input[type="text"]:invalid, input[type="password"]:invalid, input[type="email"]:invalid {
+    border-color: var(--error-color);
+}
+
+input[type="text"]:valid, input[type="password"]:valid, input[type="email"]:valid {
+    border-color: var(--success-color);
+}
+
+.validation-message {
+    font-size: 0.9em;
+    font-style: italic;
+    display: block;
+    margin-top: 5px;
+}
+
+input:invalid + .validation-message {
+    color: var(--error-color);
+}
+
+input:valid + .validation-message {
+    color: var(--success-color);
+}
+
+/* Buton de ștergere */
+button.btn-danger {
+    background-color: var(--error-color); /* Roșu pentru buton */
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+button.btn-danger:hover {
+    background-color: #c82333; /* Culoare mai închisă la hover */
+}

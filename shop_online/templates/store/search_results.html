@@ -1,0 +1,38 @@
+{% extends 'store/base.html' %}
+
+{% block content %}
+    <h1>Search Results</h1>
+
+    {% if query %}
+        <p>You searched for: "{{ query }}"</p>
+    {% else %}
+        <p>No search query provided.</p>
+    {% endif %}
+
+    {% if products %}
+        <ul>
+            {% for product in products %}
+                <li>
+                    <h2>{{ product.name }}</h2>
+                    <p>{{ product.description }}</p>
+                    <p>Price: ${{ product.price }}</p>
+
+                    {% if product.image %}
+                        <img src="{{ product.image.url }}" alt="{{ product.name }}">
+                    {% endif %}
+
+                    {% if user.is_authenticated %}
+                        <form action="{% url 'store:add_to_cart' product.id %}" method="post">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-primary">Add to Cart</button>
+                        </form>
+                    {% else %}
+                        <p><a href="{% url 'store:login' %}">Log in</a> to add to cart</p>
+                    {% endif %}
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No products found matching your search.</p>
+    {% endif %}
+{% endblock %}

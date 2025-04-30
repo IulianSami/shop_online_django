@@ -1,0 +1,12 @@
+# Ignoră mediul virtual
+venv/
+
+# Ignoră fișierele generate de IDE-uri (de exemplu, Visual Studio Code)
+.vscode/
+
+# Ignoră fișierele de log
+*.log
+
+# Ignoră fișierele Python __pycache__ și .pyc
+__pycache__/
+*.pyc

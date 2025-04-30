@@ -1,0 +1,13 @@
+<!-- store/templates/store/update_profile.html -->
+<!-- update_profile.html -->
+<!-- store/templates/store/update_profile.html -->
+{% extends 'store/base.html' %}
+
+{% block content %}
+  <h2>Update Profile</h2>
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Update</button>
+  </form>
+{% endblock %}
