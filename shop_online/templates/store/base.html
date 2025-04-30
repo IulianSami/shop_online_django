@@ -13,7 +13,7 @@
     <nav>
         <div class="navbar-container">
             <a href="{% url 'store:home' %}" class="nav-logo" aria-label="Home">
-                <img src="{% static 'store/images/logo.png' %}" alt="Store Logo" width="150">
+                <img src="{% static 'store/images/logo_rev1.png' %}" alt="Store Logo" width="150">
             </a>
 
             <div class="hamburger" onclick="toggleMenu()">&#9776;</div>
@@ -34,9 +34,7 @@
         </div>
     </nav>
 
-    <div class="weather-container">
-        {% include 'store/weather.html' %}
-    </div>
+    
 
     <main class="content-container">
         {% block content %}{% endblock %}

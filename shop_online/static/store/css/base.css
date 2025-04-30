@@ -21,7 +21,7 @@ body {
 
 /* Define color palette as CSS variables */
 :root {
-    --primary-color: #007bff;
+    --primary-color: #21c9adc1;
     --secondary-color: #ff3366;
     --success-color: #28a745;
     --error-color: #dc3545;
@@ -33,14 +33,14 @@ body {
 
 /* Navigation bar styles */
 nav {
-    background: linear-gradient(to right, var(--primary-color), #00c6ff);
+    background: rgba(24, 110, 202, 0.8);
     padding: 8px 20px;
     position: sticky;
     top: 0;
     width: 100%;
     z-index: 1000;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-    border-radius: 10px 10px 0 0;
+    border-radius: 10px 10px 10px 10px;
     display: flex;
     align-items: center;
 }
@@ -105,20 +105,20 @@ nav ul li a {
 
 /* Hover effect on nav links */
 nav ul li a:hover {
-    color: white;
-    background-color: var(--secondary-color);
+    color: rgb(74, 72, 177); /* Culoare text la hover */
+    background-color: #2ecc71; /* Verdele pe care îl vrei ca background */
     transform: translateY(-3px);
 }
 
 /* Background effect on hover */
 nav ul li a::before {
     content: "";
-    position: absolute;
+    position: absolute; 
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: var(--secondary-color);
+    background-color: #2eccb2c5;
     border-radius: 5px;
     z-index: -1;
     transition: all 0.3s ease;
@@ -148,7 +148,7 @@ nav ul li a:hover::before {
     border-radius: 10px;
     padding: 20px;
     margin-bottom: 20px;
-    background-color: #ffffff;
+    background-color: #ffffffa8;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     width: calc(33.333% - 20px);

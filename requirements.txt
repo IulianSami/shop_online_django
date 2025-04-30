@@ -1,1 +1,16 @@
-django==4.1.1
+asgiref==3.8.1
+certifi==2025.4.26
+charset-normalizer==3.4.1
+Django==4.1.1
+django-extensions==3.2.1
+django-sendgrid-v5==1.2.4
+idna==3.10
+pillow==11.1.0
+python-http-client==3.3.7
+requests==2.32.3
+sendgrid==6.11.0
+sqlparse==0.5.3
+starkbank-ecdsa==2.2.0
+typing_extensions==4.13.1
+tzdata==2025.2
+urllib3==2.4.0

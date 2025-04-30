@@ -1,1 +1,0 @@
-sendgrid-django==4.2.0
