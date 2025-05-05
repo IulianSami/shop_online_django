@@ -150,7 +150,7 @@ nav ul li a:hover::before {
     border-radius: 10px;
     padding: 20px;
     margin-bottom: 20px;
-    background-color: #ffffffa8;
+    background-color: #ffffff6e;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     width: calc(33.333% - 20px);
@@ -198,7 +198,7 @@ nav ul li a:hover::before {
     max-width: 500px; 
     margin: 0 auto;
     padding: 20px;
-    background-color: #f9f9f9;
+    background-color: #464646;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     text-align: center; 
@@ -274,6 +274,14 @@ form label {
 .btn-signup:hover {
     background-color: #005b99;
 }
+
+/* Modify help text color */
+.helptext {
+    color: rgb(0, 0, 0); 
+    font-size: 14px; 
+}
+
+
 
 /* Container login */
 form {
@@ -653,7 +661,7 @@ a:focus, button:focus, input:focus {
 
 /* Navigation bar styles */
 nav {
-    background: rgba(54, 192, 132, 0.8);
+    background: rgba(54, 192, 132, 0.61);
     padding: 8px 20px;
     position: sticky;
     top: 0;

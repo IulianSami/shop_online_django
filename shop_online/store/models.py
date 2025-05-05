@@ -4,6 +4,7 @@ from django.contrib.auth.models import User
 from django.utils import timezone
 from django.db.models.signals import post_save
 from django.dispatch import receiver
+from django import forms
 
 # Model representing a product category
 class Category(models.Model):
@@ -152,3 +153,4 @@ class OrderItem(models.Model):
 
     def get_total_price(self):
         return self.quantity * self.price  # Price of the order item
+    

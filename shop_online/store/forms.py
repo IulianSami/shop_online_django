@@ -9,8 +9,8 @@ from .models import Profile, Review
 # SignUpForm for user registration
 class SignUpForm(forms.ModelForm):
     email = forms.EmailField(required=True)  # Email field, required for registration
-    password1 = forms.CharField(widget=forms.PasswordInput)  # Password field, will be used for the user's password
-    password2 = forms.CharField(widget=forms.PasswordInput)  # Confirmation password field, to match password1
+    password1 = forms.CharField(widget=forms.PasswordInput, label="Password")  # Password field, will be used for the user's password
+    password2 = forms.CharField(widget=forms.PasswordInput, label="Confirm Password")  # Confirmation password field, to match password1
     
 
     class Meta:
@@ -21,6 +21,7 @@ class SignUpForm(forms.ModelForm):
     def clean_password2(self):
         password1 = self.cleaned_data.get('password1')
         password2 = self.cleaned_data.get('password2')
+        
         if password1 and password2 and password1 != password2:  # If password1 and password2 are different, raise an error
             raise forms.ValidationError("Passwords don't match!")
         return password2

@@ -325,7 +325,7 @@ def checkout(request):
         })
 
 
-##   Simple "Thank You" page after placing an order   !!!!!!!!!! de vazut de ce nu afiseaza
+#   Simple "Thank You" page after placing an order!
 def thank_you(request):
     weather = get_authenticated_weather(request) 
     return render(request, 'store/thank_you.html', {
