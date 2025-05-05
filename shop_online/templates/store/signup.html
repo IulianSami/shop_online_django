@@ -15,7 +15,7 @@
     <form method="post">
         {% csrf_token %}
     
-        <!-- Titlu pentru Username -->
+        <!-- Title for  Username -->
         <div class="form-group">
             <label for="{{ user_form.username.id_for_label }}">Username:</label>
             {{ user_form.username }}
@@ -29,7 +29,7 @@
             {% endif %}
         </div>
     
-        <!-- Titlu pentru Password1 -->
+        <!-- Title for Password1 -->
         <div class="form-group">
             <label for="{{ user_form.password1.id_for_label }}">Password:</label>
             {{ user_form.password1 }}
@@ -43,7 +43,7 @@
             {% endif %}
         </div>
     
-        <!-- Titlu pentru Password2 -->
+        <!-- Title for Password2 -->
         <div class="form-group">
             <label for="{{ user_form.password2.id_for_label }}">Confirm Password:</label>
             {{ user_form.password2 }}
@@ -57,7 +57,7 @@
             {% endif %}
         </div>
     
-        <!-- Titlu pentru Email -->
+        <!-- Title for Email -->
         <div class="form-group">
             <label for="{{ user_form.email.id_for_label }}">Email:</label>
             {{ user_form.email }}

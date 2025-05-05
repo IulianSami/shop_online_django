@@ -178,7 +178,7 @@ LOGOUT_REDIRECT_URL = 'store:home'  # Redirect to store home after logout
 CSRF_COOKIE_SECURE = False          # Duplicate setting — make sure to keep only one in practice
  
 # Autodisconnect if user/admin does nothing on website for 1 minute
-SESSION_COOKIE_AGE = 3600  # 60 minutes (1800 seconds) session expiration time
+SESSION_COOKIE_AGE = 3600  # 60 minutes (1800 seconds = 30 minutes) session expiration time
 # This line means : sesion expire when browser close
 SESSION_EXPIRE_AT_BROWSER_CLOSE = True
 
