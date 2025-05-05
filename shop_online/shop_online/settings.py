@@ -165,8 +165,13 @@ CSRF_COOKIE_SECURE = False   # Set to True if using HTTPS
 CSRF_TRUSTED_ORIGINS = ['http://127.0.0.1:8000', 'http://127.0.0.1:8000/store/signup/']  # Trusted domains for CSRF validation
 
 
+from dotenv import load_dotenv # Load environment variables from .env file
+load_dotenv()  # Load variables from .env
 
-WEATHER_API_KEY = 'a64a006796c012dd633312f690ca15ad'  # API key for weather feature
+WEATHER_API_KEY = os.getenv('WEATHER_API_KEY')  # Obține cheia API
+
+
+
 
 LOGOUT_REDIRECT_URL = 'store:home'  # Redirect to store home after logout
 
@@ -181,8 +186,8 @@ SESSION_EXPIRE_AT_BROWSER_CLOSE = True
 
 # Send Contact Message directly to ADMINs email address:
 #EMAIL_BACKEND = "sendgrid_backend.SendgridBackend"  # for production / live server
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend' # for local development 
-SENDGRID_API_KEY = 'TQBXMRK9UXMMUCRG2RE2G6EK'
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend' # for local development
+SENDGRID_API_KEY = os.getenv('SENDGRID_API_KEY')
 SENDGRID_SANDBOX_MODE_IN_DEBUG = False
 SENDGRID_ECHO_TO_STDOUT = True
 SENDGRID_API_URL = 'https://api.sendgrid.com/v3/mail/send'

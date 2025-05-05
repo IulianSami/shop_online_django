@@ -4,17 +4,6 @@
     <h1>Your Cart</h1>
 
 
-    {% if messages %}
-    {% for message in messages %}
-        <div style="padding: 10px; background: #ddf0d8; border: 1px solid #90c290; margin-bottom: 10px;">
-            {{ message }}
-        </div>
-    {% endfor %}
-{% endif %}
-
-
-
-
     {% if items %}
         <ul>
             {% for item in items %}

@@ -14,7 +14,7 @@ body {
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
-    color: #333;
+    color: #98e3ff;
     padding: 20px;
     min-height: 100vh;
 }
@@ -122,7 +122,7 @@ nav ul li a:hover::before {
 /* Welcome, user*/
 .welcome-message {
     margin-left: auto;       /* Plasează-l la dreapta */
-    color: rgb(1, 0, 0);            /* Culoarea textului */
+    color: rgb(188, 206, 255);            /* Culoarea textului */
     font-weight: bold;       /* Face textul bold */
     font-size: 16px;         /* Dimensiunea fontului (poți ajusta după preferință) */
     padding: 0 15px;         /* Adaugă spațiu pe lateral */
@@ -547,7 +547,7 @@ a:focus, button:focus, input:focus {
 
 .home-welcome h1 {
     font-size: 2rem;
-    background-image: linear-gradient(90deg, #000100, #000000, #000000, #000000); /* Gradient pe text */
+    background-image: linear-gradient(90deg, #0056b3, #292525, #332e2e, #0056b3); /* Gradient pe text */
     -webkit-background-clip: text; /* Folosit pentru a aplica gradientul doar pe text */
     background-clip: text; /* Asigură că gradientul se aplică doar pe text */
     color: transparent; /* Face textul transparent pentru a vedea doar gradientul */
@@ -556,7 +556,7 @@ a:focus, button:focus, input:focus {
 }
 
 .home-welcome p {
-    color: #000100; /* schimbă aici culoarea subtitlului */
+    color: #1c2131; /* schimbă aici culoarea subtitlului */
     font-size: 1.2rem;
 }
 

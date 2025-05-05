@@ -373,6 +373,7 @@ def update_cart(request, item_id):
         else:
             messages.error(request, f"Insufficient stock for {cart_item.product.name}.")
 
+    # Redirecționare după actualizare
     return redirect('store:cart_view')
 
 
