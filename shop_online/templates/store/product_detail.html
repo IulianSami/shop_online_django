@@ -15,20 +15,59 @@
         </form>
     </div>
 
-    <h3>Leave a Review</h3>
+    <h3 style="text-align: center;">Leave a Review</h3>
     <form method="POST">
         {% csrf_token %}
+
         <label for="rating">Rating:</label>
-        <input type="number" id="rating" name="rating" min="1" max="5" required>
+        <div class="star-rating">
+            {% for i in "54321"|make_list %}
+                <input type="radio" id="star{{ i }}" name="rating" value="{{ i }}">
+                <label for="star{{ i }}">&#9733;</label>
+            {% endfor %}
+        </div>
+        <style>
+            .star-rating {
+                direction: rtl;
+                display: inline-flex;
+                justify-content: center;
+            }
+        
+            .star-rating input[type="radio"] {
+                display: none;
+            }
+        
+            .star-rating label {
+                font-size: 2rem;
+                color: lightgray;
+                cursor: pointer;
+                transition: color 0.2s;
+            }
+        
+            .star-rating input[type="radio"]:checked ~ label,
+            .star-rating label:hover,
+            .star-rating label:hover ~ label {
+                color: gold;
+            }
+        </style>
+        
         <label for="text">Review Text:</label>
         <textarea id="text" name="text" required></textarea>
         <button type="submit">Submit Review</button>
     </form>
 
-    <h3>Reviews</h3>
+    <h3 style="text-align: center;">Reviews</h3>
     {% for review in reviews %}
         <div class="review">
-            <p><strong>{{ review.user.username }}</strong> - Rating: {{ review.rating }} stars</p>
+            <p><strong>{{ review.user.username }}</strong> – 
+                {% for i in "12345"|make_list %}
+                    {% if forloop.counter <= review.rating %}
+                        <span style="color: gold;">&#9733;</span>
+                    {% else %}
+                        <span style="color: lightgray;">&#9733;</span>
+                    {% endif %}
+                {% endfor %}
+            </p>
             <p>{{ review.text }}</p>
             
             <!-- Time from creating review -->
