@@ -14,7 +14,7 @@ body {
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
-    color: #98e3ff;
+    color: #e0f1f8;
     padding: 20px;
     min-height: 100vh;
 }
@@ -93,8 +93,8 @@ nav ul li a {
 
 /* Hover effect on nav links */
 nav ul li a:hover {
-    color: rgb(74, 72, 177); /* Culoare text la hover */
-    background-color: #2ecc71; /* Verdele pe care îl vrei ca background */
+    color: rgb(74, 72, 177); 
+    background-color: #2ecc71; 
     transform: translateY(-3px);
 }
 
@@ -121,14 +121,14 @@ nav ul li a:hover::before {
 
 /* Welcome, user*/
 .welcome-message {
-    margin-left: auto;       /* Plasează-l la dreapta */
-    color: rgb(188, 206, 255);            /* Culoarea textului */
-    font-weight: bold;       /* Face textul bold */
-    font-size: 16px;         /* Dimensiunea fontului (poți ajusta după preferință) */
-    padding: 0 15px;         /* Adaugă spațiu pe lateral */
-    white-space: nowrap;     /* Evită întreruperea liniei pentru un singur rând */
-    font-family: 'Poppins', sans-serif; /* Folosește aceeași fontă ca restul site-ului */
-    text-transform: capitalize; /* Fă ca fiecare cuvânt să înceapă cu literă mare */
+    margin-left: auto;       
+    color: rgb(188, 206, 255);            
+    font-weight: bold;       
+    font-size: 16px;         
+    padding: 0 15px;         
+    white-space: nowrap;     
+    font-family: 'Poppins', sans-serif; 
+    text-transform: capitalize; 
 }
 
 
@@ -192,19 +192,19 @@ nav ul li a:hover::before {
 }
 
 /* Signup form container */
-/* Containerele formularului */
+
 .signup-container {
     width: 100%;
-    max-width: 500px; /* Dimensiune maximă pentru formular */
+    max-width: 500px; 
     margin: 0 auto;
     padding: 20px;
     background-color: #f9f9f9;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    text-align: center; /* Centrăm textul în formular */
+    text-align: center; 
 }
 
-/* Titlul formularului */
+/* Title form */
 h1 {
     text-align: center;
     font-size: 24px;
@@ -212,7 +212,7 @@ h1 {
     margin-bottom: 20px;
 }
 
-/* Mesaje de succes / eroare */
+/* Error or succes messages */
 .messages {
     list-style-type: none;
     padding: 0;
@@ -227,13 +227,13 @@ h1 {
     border-radius: 5px;
 }
 
-/* Formularele */
+/* Forms */
 form {
     display: flex;
     flex-direction: column;
 }
 
-/* Stilizare pentru câmpuri de text */
+/* Style text */
 form input {
     width: 100%;
     padding: 10px;
@@ -250,14 +250,14 @@ form input:focus {
     outline: none;
 }
 
-/* Etichete */
+/* Labels */
 form label {
     font-size: 16px;
     color: #333;
     margin-bottom: 5px;
 }
 
-/* Stilizarea butonului de submit */
+/* Style submit button */
 .btn-signup {
     background-color: #006fb9;
     color: rgba(255, 255, 255, 0.708);
@@ -275,7 +275,7 @@ form label {
     background-color: #005b99;
 }
 
-/* Container pentru login */
+/* Container login */
 form {
     max-width: 400px;
     margin: 0 auto;
@@ -285,14 +285,14 @@ form {
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
   }
   
-  /* Stil pentru heading */
+  /* Style for heading */
   h1 {
     text-align: center;
     margin-bottom: 20px;
     color: #1e90ff;
   }
   
-  /* Buton login */
+  /* Login button */
   button[type="submit"] {
     width: 100%;
     padding: 10px;
@@ -310,7 +310,7 @@ form {
     background-color: #0077cc;
   }
   
-  /* Link sub form */
+  /* Link under form */
   p {
     text-align: center;
     margin-top: 15px;
@@ -319,7 +319,7 @@ form {
 
 /* Contact text 'If you have any questions, feel free to reach out!' */
   .contact-text {
-    color: #1b18cb; /* sau orice altă culoare vrei */
+    color:  #07b1fa;
     font-size: 1.1rem;
 }
 
@@ -351,7 +351,7 @@ form {
 .search-button {
     padding: 12px 20px;
     font-size: 16px;
-    background-color: #1798247b; /* Asigură-te că ai definit var(--primary-color) în :root */
+    background-color: #1798247b; 
     color: rgba(3, 209, 116, 0.874);
     border-radius: 25px 25px 25px 25px;
     border: none;
@@ -360,7 +360,7 @@ form {
 }
 
 .search-button:hover {
-    background-color: #0057b3e8; /* Albastru mai închis la hover */
+    background-color: #0057b3e8; 
 }
 
 
@@ -379,10 +379,10 @@ form {
     }
 
     .nav-logo {
-        margin: 0;                /* Elimină orice margine care poate afecta alinierea */
-        display: block;           /* Asigură-te că logo-ul este un element de tip block */
-        height: 40px;             /* Ajustează înălțimea logo-ului (poți schimba dacă vrei) */
-        width: auto;              /* Lăsăm lățimea să se ajusteze în funcție de înălțime */
+        margin: 0;                
+        display: block;           
+        height: 40px;             
+        width: auto;              
     }
 
     .nav-links {
@@ -431,17 +431,17 @@ form {
     }
 
     .signup-container {
-        width: 90%; /* Facem formularul să ocupe mai mult spațiu pe ecranele mici */
+        width: 90%; 
         padding: 15px;
     }
 
     h1 {
-        font-size: 20px; /* Reducem puțin fontul pe ecrane mici */
+        font-size: 20px; 
     }
 
     form input, .btn-signup {
-        font-size: 14px; /* Reducem dimensiunea fontului pe ecranele mici */
-        padding: 10px; /* Reducem paddingul pentru câmpuri și buton */
+        font-size: 14px; 
+        padding: 10px; 
     }
 }
 
@@ -538,32 +538,32 @@ a:focus, button:focus, input:focus {
 
 /* Welcome_text */
 .home-welcome {
-    background-color: rgba(16, 167, 114, 0.493); /* Fundal alb pentru întregul container */
-    padding: 40px; /* Adăugăm spațiu în jurul conținutului */
-    border-radius: 15px; /* Colțuri rotunjite */
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Adăugăm un umbră pentru un efect mai 3D */
-    text-align: center; /* Aliniere centrală */
+    background-color: rgba(16, 167, 114, 0.493); 
+    padding: 40px; 
+    border-radius: 15px; 
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    text-align: center; 
 }
 
 .home-welcome h1 {
     font-size: 2rem;
-    background-image: linear-gradient(90deg, #0056b3, #292525, #332e2e, #0056b3); /* Gradient pe text */
-    -webkit-background-clip: text; /* Folosit pentru a aplica gradientul doar pe text */
-    background-clip: text; /* Asigură că gradientul se aplică doar pe text */
-    color: transparent; /* Face textul transparent pentru a vedea doar gradientul */
-    margin-bottom: 20px; /* Adaugă un spațiu sub titlu */
+    background-image: linear-gradient(90deg, #dcdcdc, #a9a9a9, #f5f5f5, #c0c0c0, #dcdcdc);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    margin-bottom: 20px;
     
 }
 
 .home-welcome p {
-    color: #1c2131; /* schimbă aici culoarea subtitlului */
+    color: #ffffff;
     font-size: 1.2rem;
 }
 
 
 
 
-/* Bara de navigare */
+/* Navigation bar */
 .navbar {
     display: flex;
     flex-direction: column;
@@ -586,12 +586,12 @@ a:focus, button:focus, input:focus {
     display: block;
     height: 3px;
     width: 100%;
-    background-color: rgb(159, 0, 0); /* Culoare linie */
+    background-color: rgb(159, 0, 0); 
     border-radius: 2px;
     transition: all 0.3s ease-in-out;
 }
 
-/* Animația hamburgerului - Transformă-l într-un X */
+/* Hamburger Animation X */
 .hamburger.active span:nth-child(1) {
     transform: rotate(45deg) translate(5px, 5px);
 }
@@ -602,7 +602,7 @@ a:focus, button:focus, input:focus {
     transform: rotate(-45deg) translate(5px, -5px);
 }
 
-/* Meniul de navigare (ascuns pe mobil) */
+/* Hidden navigation menu on mobile */
 .navbar-menu {
     display: flex;
     list-style: none;
@@ -612,7 +612,7 @@ a:focus, button:focus, input:focus {
     width: 100%;
 }
 
-/* Meniul care se deschide */
+/* Menu that opens */
 .navbar-menu.show {
     display: flex;
     flex-direction: column;
@@ -624,7 +624,7 @@ a:focus, button:focus, input:focus {
     padding: 10px 0;
 }
 
-/* Stil pentru link-urile din meniu */
+/* Style for menu links */
 .navbar-menu li {
     margin: 10px 0;
     text-align: center;
@@ -637,7 +637,7 @@ a:focus, button:focus, input:focus {
     display: block;
 }
 
-/* Hover pentru link-urile din meniu */
+/* Hover for menu links */
 .navbar-menu li a:hover {
     background-color: var(--secondary-color);
 }
@@ -666,7 +666,7 @@ nav {
 }
 
 
-/* Media Query pentru dispozitive mici */
+/* Media Query small devices */
 @media screen and (max-width: 768px) {
 
     .hamburger {
@@ -679,19 +679,19 @@ nav {
     }
 
     .navbar-container {
-        display: flex;            /* Asigură că navbar-ul folosește flexbox */
-        justify-content: center;  /* Aliniază conținutul (logo și meniul) la centru pe orizontală */
-        align-items: center;      /* Aliniază pe verticală */
-        flex-direction: column;   /* Asigură că meniul și logo-ul sunt într-o coloană */
+        display: flex;            
+        justify-content: center;  
+        align-items: center;      
+        flex-direction: column;   
     }
 
     .navbar-menu {
-        display: none; /* Ascunde meniul pe mobil */
+        display: none; /* Hide menu on mobile */
         flex-direction: column;
         background-color: var(--primary-color);
         width: 100%;
         position: absolute;
-        top: 100%; /* Meniul se va deschide sub hamburger */
+        top: 100%; /* The menu will open under the hamburger */
         left: 0;
         padding: 10px 0;
         text-align: center;
@@ -699,7 +699,7 @@ nav {
 
 
     .navbar-menu.show {
-        display: flex; /* Arată meniul când clasa show este adăugată */
+        display: flex; /* Show menu when the show class is added */
     }
 }
 

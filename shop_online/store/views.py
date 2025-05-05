@@ -603,15 +603,3 @@ def leave_review(request, product_id):
         'form': form,
         'product': product
     })
-
-
-
-
-
-
-
-
-# Alternate store/index view (could be removed if duplicate)
-# def store_view(request):
-#     weather = get_authenticated_weather(request) 
-#     return render(request, 'store/index.html', {'weather': weather['weather'], 'weather_error': weather['weather_error']})

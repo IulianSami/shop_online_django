@@ -13,7 +13,7 @@
     <nav>
         <div class="navbar-container">
             <a href="{% url 'store:home' %}" class="nav-logo" aria-label="Home">
-                <img src="{% static 'store/images/logo_rev1.png' %}" alt="Store Logo" width="150">
+                <img src="{% static 'store/images/logo_rev2.png' %}" alt="Store Logo" width="150">
             </a>
         
             <div class="hamburger" onclick="toggleMenu(this)">
@@ -45,12 +45,12 @@
     </nav>
 
     <script>
-        // Funcția care va activa/dezactiva meniul și animația hamburgerului
+        // Function for toggling the menu
         function toggleMenu(el) {
-            const menu = document.getElementById("navbarMenu"); // Meniul
-            menu.classList.toggle("show"); // Activează sau dezactivează meniul
+            const menu = document.getElementById("navbarMenu"); // Menu
+            menu.classList.toggle("show"); // Activate or deactivate the menu
     
-            el.classList.toggle("active"); // Activează sau dezactivează animația hamburgerului
+            el.classList.toggle("active"); // Activate or deactivate the hamburger icon
         }
     </script>
 
@@ -67,7 +67,7 @@
     {% endif %}
 
     <script>
-        // Ascunde mesajul de eroare inițial
+        // Hide error message on page load
         document.addEventListener('DOMContentLoaded', function() {
             var error = document.getElementById('error-message');
             if (error) error.style.display = 'none';
@@ -91,7 +91,7 @@
         }
 
         
-        // Auto logout after 30 minutes of inactivity
+        // Auto logout after 60 minutes of inactivity
         var logoutTime = 3600000; // 60 minutes in milliseconds
         var timeout;
         function resetTimer() {
