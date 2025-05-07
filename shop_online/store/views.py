@@ -14,6 +14,7 @@ import requests
 from django.contrib.auth.views import LoginView
 from .models import Profile
 from django.core.mail import send_mail
+from .forms import AgreeTermsForm
 #from .forms import ContactForm  # if use form Django
 
 
@@ -94,12 +95,24 @@ def search_products(request):
     })
 
 
-# Homepage view that shows weather information
 def home(request):
-    weather = get_weather_data(get_user_city(request)) 
+    weather = get_weather_data(get_user_city(request))
+    
+    # Calculăm numărul de produse din coș doar dacă utilizatorul este autentificat
+    if request.user.is_authenticated:
+        cart = Cart.objects.filter(user=request.user).first()
+        if cart:
+            items = cart.items.all()
+            item_count = sum(item.quantity for item in items)  # Numărul total de produse
+        else:
+            item_count = 0  # Dacă nu există coș, numărul de produse este 0
+    else:
+        item_count = 0  # Dacă utilizatorul nu este autentificat, setăm numărul de produse la 0
+    
     return render(request, 'store/home.html', {
         'weather': weather['weather'],
         'weather_error': weather['weather_error'],
+        'item_count': item_count,  # Trimit numărul de produse
     })
 
 
@@ -203,21 +216,20 @@ def product_list(request):
 @login_required
 def cart_view(request):
     cart = Cart.objects.filter(user=request.user).first()
+    
     if cart:
         items = cart.items.all()
-        total = sum(item.get_total_price() for item in items)
+        total = sum(item.get_total_price() for item in items)  
+        item_count = sum(item.quantity for item in items)
     else:
         items = []
         total = 0
-
-    weather = get_authenticated_weather(request) 
+        item_count = 0
 
     return render(request, 'store/cart.html', {
-        'cart': cart,
         'items': items,
-        'total': total,
-        'weather': weather['weather'],
-        'weather_error': weather['weather_error'],
+        'total': total,               
+        'item_count': item_count,
     })
 
 
@@ -603,3 +615,28 @@ def leave_review(request, product_id):
         'form': form,
         'product': product
     })
+
+
+
+
+def agree_terms_and_conditions(request):
+    if request.method == 'POST':
+        form = AgreeTermsForm(request.POST)
+        if form.is_valid():
+            # Redirect to the success page
+            return redirect('store:checkout')  
+    else:
+        form = AgreeTermsForm()
+
+    return render(request, 'store/agree_terms_and_conditions.html', {'form': form})
+
+def terms_success(request):
+    return render(request, 'store/terms_success.html')
+
+
+
+def base_view(request):
+    # Verify products in cart
+    cart_items_count = len(request.session.get('cart', {}))  # If using session to store cart items
+
+    return render(request, 'base.html', {'cart_items_count': cart_items_count})

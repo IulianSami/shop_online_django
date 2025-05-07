@@ -1,0 +1,11 @@
+{% extends 'store/base.html' %}
+
+{% block title %}Terms Accepted{% endblock %}
+
+{% block content %}
+  <div class="success-container">
+    <h1>Success!</h1>
+    <p>You have successfully agreed to the terms and conditions.</p>
+    <a href="{% url 'store:agree_terms_and_conditions' %}">Go back to terms</a>
+  </div>
+{% endblock %}

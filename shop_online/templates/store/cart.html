@@ -8,8 +8,8 @@
         <ul>
             {% for item in items %}
                 <li>
-                    {{ item.product.name }} - ${{ item.product.price }} 
-                    <strong>Total: ${{ item.get_total_price }}</strong>
+                    {{ item.product.name }} - ${{ item.product.price }} each
+                    
 
                     <!-- Form for update quantity -->
                     <form action="{% url 'store:update_cart' item.id %}" method="POST">
@@ -42,4 +42,8 @@
     {% else %}
         <p style="color: blue;">Your cart is empty!</p>
     {% endif %}
+
+    <!-- Add button  'Buy More' link  -->
+    <p><a href="{% url 'store:product_list' %}">Buy More</a></p>
 {% endblock %}
+

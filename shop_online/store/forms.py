@@ -60,3 +60,10 @@ class ReviewForm(forms.ModelForm):
 
     rating = forms.ChoiceField(choices=[(i, str(i)) for i in range(1, 6)], widget=forms.RadioSelect)  # Rate the product from 1 to 5
     text = forms.CharField(widget=forms.Textarea, required=True)  # Text field for the review
+
+
+class AgreeTermsForm(forms.Form):
+    agree = forms.BooleanField(
+        label="I agree to the terms and conditions",
+        required=True
+    )

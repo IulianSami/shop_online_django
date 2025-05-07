@@ -32,9 +32,13 @@ urlpatterns = [
     path('admin/', admin.site.urls),  # Admin panel
     path('logout/', auth_views.LogoutView.as_view(), name='logout'),  # URL for logging out
     path('', views.home, name='home'),  # Root URL, directs to home view in views.py
-    path('store/', include('store.urls')),  # Includes the URL patterns defined in the store app
+    path('store/', include('store.urls', namespace='store')),  # Includes the URL patterns defined in the store app
     path('accounts/', include('django.contrib.auth.urls')),  # URLs for authentication (login, password reset, ...)
     path('accounts/signup/', views.signup, name='signup'),  # URL for the user registration page
+    path('terms/', views.agree_terms_and_conditions, name='agree_terms_and_conditions'),
+    
+    
+    
     
 ]
 

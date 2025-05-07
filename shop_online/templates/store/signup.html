@@ -12,7 +12,7 @@
         </ul>
     {% endif %}
 
-    <form method="post">
+    <form method="post" action="{% url 'store:signup' %}">
         {% csrf_token %}
     
         <!-- Title for  Username -->
