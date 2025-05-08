@@ -9,6 +9,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="icon" href="{% static 'store/images/favicon.ico' %}" type="image/x-icon">
     <link rel="stylesheet" href="{% static 'store/css/base.css' %}">
+    
 </head>
 <body>
     <nav>
@@ -30,7 +31,7 @@
                     <li><a href="{% url 'store:cart_view' %}" aria-label="Cart">
                         Cart
                         {% if item_count > 0 %}
-                            <span class="cart-count">{{ item_count }}</span>  <!-- Afișează numărul de produse -->
+                            <span class="cart-count">{{ item_count }}</span>  
                         {% endif %}
                     </a></li>
                     <li><a href="javascript:void(0);" class="logout-btn" onclick="confirmLogout()" aria-label="Logout">Log Out</a></li>

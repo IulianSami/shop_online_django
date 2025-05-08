@@ -40,7 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'store', # manual add app store
+    'store.apps.StoreConfig', # manual add app store
 ]
 
 MIDDLEWARE = [
@@ -191,7 +191,7 @@ EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend' # for local dev
 SENDGRID_API_KEY = os.getenv('SENDGRID_API_KEY')
 SENDGRID_SANDBOX_MODE_IN_DEBUG = False
 SENDGRID_ECHO_TO_STDOUT = True
-SENDGRID_API_URL = 'https://api.sendgrid.com/v3/mail/send'
+
 
 EMAIL_HOST_USER = 'iuliansami@gmail.com'  # Admin email address
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER

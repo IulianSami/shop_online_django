@@ -1,49 +1,68 @@
 {% extends 'store/base.html' %}
 
+{% block title %}Your Cart - Online Store{% endblock %}
+
 {% block content %}
-    <h1>Your Cart</h1>
+<div class="cart-container">
+    <!-- Big card -->
+    <div class="cart-card">
+        <h1>Your Cart</h1>
 
+        {% if items %}
+            <ul>
+                {% for item in items %}
+                    <li class="cart-item">
+                        <!-- Container for detail of products, option for delete and update  -->
+                        <div class="item-container">
+                            <!-- Name of product and price -->
+                            <div class="item-info">
+                                <span class="product-name">{{ item.product.name }}</span> 
+                                <span class="product-price">${{ item.product.price }}</span> <span class="price-each">each</span>
+                            </div>
 
-    {% if items %}
-        <ul>
-            {% for item in items %}
-                <li>
-                    {{ item.product.name }} - ${{ item.product.price }} each
-                    
+                            <!-- Common container for Quantity, Update and Remove -->
+                            <div class="update-remove-card">
+                                <form action="{% url 'store:update_cart' item.id %}" method="POST">
+                                    {% csrf_token %}
+                                    
+                                    <!-- Quantity -->
+                                    <label for="quantity_{{ item.id }}">Quantity:</label>
+                                    <input type="number" name="quantity" id="quantity_{{ item.id }}" value="{{ item.quantity }}" min="1" max="{{ item.product.stock }}" required>
+                                    
+                                    <!-- Update button -->
+                                    <button type="submit">Update</button>
+                                </form>
 
-                    <!-- Form for update quantity -->
-                    <form action="{% url 'store:update_cart' item.id %}" method="POST">
-                        {% csrf_token %}
-                        <label for="quantity_{{ item.id }}">Cantitate:</label>
-                        <input type="number" name="quantity" id="quantity_{{ item.id }}" value="{{ item.quantity }}" min="1" max="{{ item.product.stock }}" required>
-                        <button type="submit">Update</button>
-                    </form>
+                                <!-- Form for delete items from the cart -->
+                                <form action="{% url 'store:remove_from_cart' item.id %}" method="POST">
+                                    {% csrf_token %}
+                                    <button type="submit" class="btn-danger">Remove</button>
+                                </form>
+                            </div>
+                        </div>
+                    </li>
+                {% endfor %}
+            </ul>
 
-                    <!-- Form delete product from Cart -->
-                    <form action="{% url 'store:remove_from_cart' item.id %}" method="post">
-                        {% csrf_token %}
-                        <button type="submit" class="btn-danger">Remove</button>
-                    </form>
-                </li>
-            {% endfor %}
-        </ul>
+            <h3 class="total-price">Total: ${{ total }}</h3>
+            <p>Total items: {{ item_count }}</p>
 
-        <h3>Total: ${{ total }}</h3>
-
-        {% if has_zero_stock %}
-            <p style="color: red;">Cannot proceed to checkout. One or more items are out of stock.</p>
-        {% else %}
-            <!-- Form for go to checkout -->
-            <form action="{% url 'store:checkout' %}" method="GET">
-                <button type="submit">Proceed to Checkout</button>
+            {% if has_zero_stock %}
+                <p style="color: red;">One or more items are out of stock, cannot proceed to checkout.</p>
+            {% else %}
+            <form action="{% url 'store:checkout' %}" method="GET" class="checkout-form">
+                <button type="submit" class="checkout-button">Proceed to Checkout</button>
             </form>
+            {% endif %}
+        {% else %}
+            <p style="color: blue;">Your cart is empty!</p>
         {% endif %}
+    </div>
 
-    {% else %}
-        <p style="color: blue;">Your cart is empty!</p>
-    {% endif %}
-
-    <!-- Add button  'Buy More' link  -->
-    <p><a href="{% url 'store:product_list' %}">Buy More</a></p>
+    <!-- Card for add more products -->
+    <div class="buy-more-card">
+        <h3>Want to add more items to your cart?</h3>
+        <a href="{% url 'store:product_list' %}" class="btn-buy-more">Buy More</a>
+    </div>
+</div>
 {% endblock %}
-

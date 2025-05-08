@@ -6,19 +6,30 @@
 <div class="checkout-container">
     <h1>Checkout</h1>
 
-    <h3>Your Cart:</h3>
     {% if items %}
-        <ul class="cart-items-list">
-            {% for item in items %}
-                <li class="cart-item">
-                    <span class="product-name">{{ item.product.name }}</span> 
-                    <span class="quantity">{{ item.quantity }} x ${{ item.product.price }}</span>
-                    
-                </li>
-            {% endfor %}
-        </ul>
-        <h3 class="total-amount">Total: ${{ total }}</h3>
+        <!-- Card for brief cart -->
+        <div class="order-summary-card" style="
+                    background-color: rgba(247, 247, 247, 0.5);
+                    padding: 15px 25px;
+                    border-radius: 30px;
+                    margin: 20px auto;
+                    width: fit-content;
+                    text-align: center;
+                    color: #222222;
+                    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+                    ">
+    <h3>Your Cart:</h3>
+    <ul class="cart-items-list" style="list-style: none; padding: 0;">
+        {% for item in items %}
+            <li class="cart-item">
+                <strong>{{ item.product.name }}</strong> – {{ item.quantity }} x ${{ item.product.price }}
+            </li>
+        {% endfor %}
+    </ul>
+    <h3 class="total-amount" style="margin-top: 10px;">Total: ${{ total }}</h3>
+</div>
 
+        <!-- Form of checkout -->
         <form action="{% url 'store:place_order' %}" method="POST" class="checkout-form">
             {% csrf_token %}
 

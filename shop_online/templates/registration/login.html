@@ -1,21 +1,22 @@
 {% extends 'store/base.html' %}
 
 {% block content %}
-<h1>Login</h1>
+<div class="signup-container">
+    <h1>Login</h1>
 
-<!-- Form of  authenticity-->
-<form method="post">
-    {% csrf_token %}
-    <!-- Form view  -->
-    {{ form.as_p }}
+    <!-- Form of authenticity -->
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
 
-   
+        <!-- Button submit -->
+        <button type="submit">Log In</button>
+    </form>
 
-    <!-- Buton submit -->
-    <button type="submit">Log In</button>
-</form>
-
-<!-- Link for Sign Up -->
-<p>Don't have an account? <a href="{% url 'signup' %}">Sign up here</a>.</p>
-
+    <!-- Text + link in the same card -->
+    <p class="signup-link">
+        Don't have an account?
+        <a href="{% url 'signup' %}">Sign up here</a>.
+    </p>
+</div>
 {% endblock %}

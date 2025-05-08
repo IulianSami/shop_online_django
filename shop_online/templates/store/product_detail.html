@@ -3,118 +3,216 @@
 {% block title %}{{ product.name }}{% endblock %}
 
 {% block content %}
-    <h2>{{ product.name }}</h2>
-    <p>{{ product.description }}</p>
-    <p><strong>Price:</strong> ${{ product.price }}</p>
+<div class="product-detail-card">
+    <h2 class="product-title">{{ product.name }}</h2>
+    <p class="product-description">{{ product.description }}</p>
+    <p class="product-price"><strong>Price:</strong> ${{ product.price }}</p>
 
-    <!-- Button add to cart -->
+    <!-- Add to Cart Button -->
     <div class="product-actions">
         <form method="POST" action="{% url 'store:add_to_cart' product.id %}">
             {% csrf_token %}
-            <button type="submit" class="btn btn-primary">Add to Cart</button>
+            <button type="submit" class="btn add-to-cart-btn">Add to Cart</button>
         </form>
     </div>
 
-    <h3 style="text-align: center;">Leave a Review</h3>
-    <form method="POST">
-        {% csrf_token %}
+    <!-- Leave a Review -->
+    <div class="review-section">
+        <h3 class="review-section-title">Leave a Review</h3>
+        <form method="POST" class="review-form">
+            {% csrf_token %}
 
-        <label for="rating">Rating:</label>
-        <div class="star-rating">
-            {% for i in "54321"|make_list %}
-                <input type="radio" id="star{{ i }}" name="rating" value="{{ i }}">
-                <label for="star{{ i }}">&#9733;</label>
-            {% endfor %}
-        </div>
-        <style>
-            .star-rating {
-                direction: rtl;
-                display: inline-flex;
-                justify-content: center;
-            }
-        
-            .star-rating input[type="radio"] {
-                display: none;
-            }
-        
-            .star-rating label {
-                font-size: 2rem;
-                color: lightgray;
-                cursor: pointer;
-                transition: color 0.2s;
-            }
-        
-            .star-rating input[type="radio"]:checked ~ label,
-            .star-rating label:hover,
-            .star-rating label:hover ~ label {
-                color: gold;
-            }
-        </style>
-        
-        <label for="text">Review Text:</label>
-        <textarea id="text" name="text" required></textarea>
-        <button type="submit">Submit Review</button>
-    </form>
-
-    <h3 style="text-align: center;">Reviews</h3>
-    {% for review in reviews %}
-        <div class="review">
-            <p><strong>{{ review.user.username }}</strong> – 
-                {% for i in "12345"|make_list %}
-                    {% if forloop.counter <= review.rating %}
-                        <span style="color: gold;">&#9733;</span>
-                    {% else %}
-                        <span style="color: lightgray;">&#9733;</span>
-                    {% endif %}
+            <label for="rating">Rating:</label>
+            <div class="star-rating">
+                {% for i in "54321"|make_list %}
+                    <input type="radio" id="star{{ i }}" name="rating" value="{{ i }}">
+                    <label for="star{{ i }}">&#9733;</label>
                 {% endfor %}
-            </p>
-            <p>{{ review.text }}</p>
-            
-            <!-- Time from creating review -->
-            <p class="review-time" data-time="{{ review.created_at|date:"Y-m-d H:i:s" }}">
-                {% load tz %} 
-                {{ review.created_at|date:"F j, Y, g:i a"|timezone:"Europe/Bucharest" }}
-            </p>
-        </div>
-    {% empty %}
-        <p>No reviews yet.</p>
-    {% endfor %}
-    
-    <!-- Script for calculating time review -->
-    <script>
-        function timeAgo(time) {
-            const now = new Date();
-            const diffInSeconds = (now - time) / 1000; // Difference in seconds
+            </div>
 
-            if (diffInSeconds < 60) {
-                return "Few seconds ago";
-            }
+            <label for="text">Review Text:</label>
+            <textarea id="text" name="text" required></textarea>
+            <button type="submit" class="btn review-submit-btn">Submit Review</button>
+        </form>
+    </div>
 
-            const diffInMinutes = diffInSeconds / 60;
-            if (diffInMinutes < 60) {
-                return `Now ${Math.floor(diffInMinutes)} minutes ago`;
-            }
+    <!-- Reviews -->
+    <div class="all-reviews">
+        <h3 class="review-list-title">Reviews</h3>
+        {% for review in reviews %}
+            <div class="review">
+                <p><strong>{{ review.user.username }}</strong> –
+                    {% for i in "12345"|make_list %}
+                        {% if forloop.counter <= review.rating %}
+                            <span style="color: gold;">&#9733;</span>
+                        {% else %}
+                            <span style="color: lightgray;">&#9733;</span>
+                        {% endif %}
+                    {% endfor %}
+                </p>
+                <p>{{ review.text }}</p>
+                <p class="review-time" data-time="{{ review.created_at|date:"Y-m-d H:i:s" }}">
+                    {% load tz %} 
+                    {{ review.created_at|date:"F j, Y, g:i a"|timezone:"Europe/Bucharest" }}
+                </p>
+            </div>
+        {% empty %}
+            <p>No reviews yet.</p>
+        {% endfor %}
+    </div>
+</div>
 
-            const diffInHours = diffInMinutes / 60;
-            if (diffInHours < 24) {
-                return `Now ${Math.floor(diffInHours)} hours ago`;
-            }
 
-            const diffInDays = diffInHours / 24;
-            if (diffInDays < 2) {
-                return `Yesterday ${time.getHours()}:${time.getMinutes()}`;
-            }
 
-            return `${time.getDate()} ${time.toLocaleString('default', { month: 'long' })} ${time.getFullYear()} la ${time.getHours()}:${time.getMinutes()}`;
-        }
 
-        window.onload = function () {
-            const reviewTimes = document.querySelectorAll('.review-time');
-            reviewTimes.forEach(function (reviewTimeElement) {
-                const timeString = reviewTimeElement.getAttribute('data-time');
-                const reviewTime = new Date(timeString);
-                reviewTimeElement.innerText = timeAgo(reviewTime);
-            });
-        };
-    </script>
+<!-- CSS inline style -->
+<style>
+
+    .product-title {
+        color: #1b5e20;
+        font-size: 2.2em;
+        font-weight: bold;
+        text-align: center;
+        margin: 20px 0;
+        text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+    }
+
+
+    .review-section-title {
+        color: #2e7d32; /* for "Leave a Review" */
+        font-size: 1.8em;
+        font-weight: bold;
+        margin: 30px 0 15px;
+        text-align: center;
+    }
+
+    .review-list-title {
+        color: #1565c0; /* for "Reviews" */
+        font-size: 1.6em;
+        font-weight: bold;
+        margin-top: 40px;
+        text-align: center;
+    }
+
+
+
+    .product-detail-card {
+        background: #ffffff;
+        padding: 30px;
+        max-width: 800px;
+        margin: 30px auto;
+        border-radius: 12px;
+        box-shadow: 0 0 12px rgba(0,0,0,0.1);
+    }
+
+    .product-title {
+        font-size: 2rem;
+        margin-bottom: 10px;
+    }
+
+    .product-price {
+        font-size: 1.2rem;
+        color: #006400;
+        margin: 15px 0;
+    }
+
+    .btn {
+        padding: 10px 18px;
+        border: none;
+        border-radius: 30px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+
+    .add-to-cart-btn {
+        background-color: #2e7d32;
+        color: white;
+    }
+
+    .add-to-cart-btn:hover {
+        background-color: #1b5e20;
+    }
+
+    .review-form textarea {
+        width: 100%;
+        height: 100px;
+        margin-bottom: 10px;
+        border-radius: 30px;
+        padding: 8px;
+        border: 1px solid #ccc;
+    }
+
+    .review-submit-btn {
+        background-color: #004ba0;
+        color: white;
+        border-radius: 30px;
+    }
+
+    .review-submit-btn:hover {
+        background-color: #00336b;
+        border-radius: 30px;
+    }
+
+    .star-rating {
+        direction: rtl;
+        display: inline-flex;
+        justify-content: center;
+        margin-bottom: 10px;
+    }
+
+    .star-rating input[type="radio"] {
+        display: none;
+    }
+
+    .star-rating label {
+        font-size: 2rem;
+        color: rgb(185, 30, 30);
+        cursor: pointer;
+        transition: color 0.6s;
+    }
+
+    .star-rating input[type="radio"]:checked ~ label,
+    .star-rating label:hover,
+    .star-rating label:hover ~ label {
+        color: gold;
+    }
+
+    .review {
+        border-top: 1px solid #eee;
+        padding: 15px 0;
+    }
+
+    .review-time {
+        font-size: 0.9em;
+        color: #666;
+    }
+</style>
+
+<!-- Script for time calculating -->
+<script>
+    function timeAgo(time) {
+        const now = new Date();
+        const diffInSeconds = (now - time) / 1000;
+
+        if (diffInSeconds < 60) return "Few seconds ago";
+        const diffInMinutes = diffInSeconds / 60;
+        if (diffInMinutes < 60) return `Now ${Math.floor(diffInMinutes)} minutes ago`;
+
+        const diffInHours = diffInMinutes / 60;
+        if (diffInHours < 24) return `Now ${Math.floor(diffInHours)} hours ago`;
+
+        const diffInDays = diffInHours / 24;
+        if (diffInDays < 2) return `Yesterday ${time.getHours()}:${String(time.getMinutes()).padStart(2, '0')}`;
+
+        return `${time.getDate()} ${time.toLocaleString('default', { month: 'long' })} ${time.getFullYear()} la ${time.getHours()}:${String(time.getMinutes()).padStart(2, '0')}`;
+    }
+
+    window.onload = function () {
+        const reviewTimes = document.querySelectorAll('.review-time');
+        reviewTimes.forEach(function (el) {
+            const time = new Date(el.getAttribute('data-time'));
+            el.innerText = timeAgo(time);
+        });
+    };
+</script>
 {% endblock %}

@@ -4,7 +4,6 @@ from django.contrib.auth.models import User
 from django.utils import timezone
 from django.db.models.signals import post_save
 from django.dispatch import receiver
-from django import forms
 
 # Model representing a product category
 class Category(models.Model):
@@ -52,8 +51,12 @@ class Product(models.Model):
     image = models.ImageField(upload_to='products/', null=True, blank=True)  # Optional product image
     created_at = models.DateTimeField(auto_now_add=True)  # Timestamp when product was created
 
+    # Rating field for product reviews
+    rating = models.FloatField(default=0.0)  # Adăugăm câmpul rating
+
     def __str__(self):
         return self.name  # Returns product name when printed
+
 
     @property
     def in_stock(self):

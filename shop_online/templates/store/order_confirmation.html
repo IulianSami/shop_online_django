@@ -3,30 +3,31 @@
 {% block title %}Order Confirmation{% endblock %}
 
 {% block content %}
-    <div class="confirmation">
-        
-        <h1>Thank you for your order!</h1>
-        <p>Your order has been successfully placed. We will deliver it soon. 😊</p>
+    <div class="confirmation-container">
+        <div class="confirmation-card">
+            <h1>Thank you for your order!</h1>
+            <p>Your order has been successfully placed. We will deliver it soon. 😊</p>
+            <p>You will receive a confirmation email shortly.</p>
 
-        
-        <p> You will receive a confirmation email shortly.</p>
+            <h2>Order Details:</h2>
+            <p><strong>Total:</strong> ${{ order.total_price }}</p>
 
-        <h2>Order Details:</h2>
-        <p><strong>Total:</strong> ${{ order.total_price }}</p>
+            <h3>Products Purchased:</h3>
+            <ul>
+                {% for item in order_items %}
+                    <li>
+                        {{ item.product.name }} - ${{ item.product.price }} x {{ item.quantity }} 
+                        = ${{ item.get_total_price }}
+                    </li>
+                {% empty %}
+                    <li>No products found in this order.</li>
+                {% endfor %}
+            </ul>
 
-        <h3>Products Purchased:</h3>
-        <ul>
-            {% for item in order_items %}
-                <li>
-                    {{ item.product.name }} - ${{ item.product.price }} x {{ item.quantity }} 
-                    = ${{ item.get_total_price }}
-                </li>
-            {% empty %}
-                <li>No products found in this order.</li>
-            {% endfor %}
-        </ul>
-
-        <a href="{% url 'store:home' %}" class="go-home" style="margin-right: 10px;">Go to home page</a>
-        <a href="{% url 'store:product_list' %}" style="margin-left: 10px;">Back to products</a>
+            <div class="confirmation-links">
+                <a href="{% url 'store:home' %}" class="go-home" style="margin-right: 10px;">Go to home page</a>
+                <a href="{% url 'store:product_list' %}" style="margin-left: 10px;">Back to products</a>
+            </div>
+        </div>
     </div>
 {% endblock %}

@@ -15,41 +15,43 @@
     </form>
 
     <!-- Filteres -->
-    <div style="margin-top: 20px;">
-        <form method="get" style="display: flex; justify-content: center; gap: 15px;">
-            {% if request.GET.q %}<input type="hidden" name="q" value="{{ request.GET.q }}">{% endif %}
-    
-            <!-- Price filter -->
-            <select name="price_range" style="padding: 6px 10px;">
-                <option value="">All Prices</option>
-                <option value="0-100" {% if request.GET.price_range == '0-100' %}selected{% endif %}>$0-$100</option>
-                <option value="100-500" {% if request.GET.price_range == '100-500' %}selected{% endif %}>$100-$500</option>
-                <option value="500-1000" {% if request.GET.price_range == '500-1000' %}selected{% endif %}>$500-$1000</option>
-                <option value="1000+" {% if request.GET.price_range == '1000+' %}selected{% endif %}>$1000+</option>
-            </select>
-    
-            <!-- Stock filter -->
-            <select name="stock" style="padding: 6px 10px;">
-                <option value="">All Stock</option>
-                <option value="in_stock" {% if request.GET.stock == 'in_stock' %}selected{% endif %}>In Stock</option>
-                <option value="low_stock" {% if request.GET.stock == 'low_stock' %}selected{% endif %}>Low Stock</option>
-            </select>
-    
-            <!-- Category Type Filter -->
-            <select name="category" style="padding: 6px 10px;">
-                <option value="">All Categories</option>
-                <option value="Electronics" {% if request.GET.category == 'Electronics' %}selected{% endif %}>Electronics</option>
-                <option value="Electrics" {% if request.GET.category == 'Electrics' %}selected{% endif %}>Electrics</option>
-            </select>
-    
-            <!-- Button Filter -->
-            <button type="submit" style="padding: 6px 12px;">Filter</button>
-    
-            {% if request.GET.price_range or request.GET.stock or request.GET.category %}
-                <a href="?{% if request.GET.q %}q={{ request.GET.q }}{% endif %}" style="padding: 6px 12px; background: #f0f0f0; text-decoration: none;">Reset</a>
-            {% endif %}
-        </form>
-    </div>
+<div style="margin-top: 20px;">
+    <form method="get" style="display: flex; justify-content: center; gap: 15px;">
+        {% if request.GET.q %}<input type="hidden" name="q" value="{{ request.GET.q }}">{% endif %}
+
+        <!-- Price filter -->
+        <select name="price_range" style="padding: 6px 10px;">
+            <option value="">All Prices</option>
+            <option value="0-100" {% if request.GET.price_range == '0-100' %}selected{% endif %}>$0-$100</option>
+            <option value="100-500" {% if request.GET.price_range == '100-500' %}selected{% endif %}>$100-$500</option>
+            <option value="500-1000" {% if request.GET.price_range == '500-1000' %}selected{% endif %}>$500-$1000</option>
+            <option value="1000+" {% if request.GET.price_range == '1000+' %}selected{% endif %}>$1000+</option>
+        </select>
+
+        <!-- Stock filter -->
+        <select name="stock" style="padding: 6px 10px;">
+            <option value="">All Stock</option>
+            <option value="in_stock" {% if request.GET.stock == 'in_stock' %}selected{% endif %}>In Stock</option>
+            <option value="low_stock" {% if request.GET.stock == 'low_stock' %}selected{% endif %}>Low Stock</option>
+        </select>
+
+        <!-- Category Type Filter -->
+        <select name="category" style="padding: 6px 10px;">
+            <option value="">All Categories</option>
+            <option value="Electronics" {% if request.GET.category == 'Electronics' %}selected{% endif %}>Electronics</option>
+            <option value="Electrics" {% if request.GET.category == 'Electrics' %}selected{% endif %}>Electrics</option>
+        </select>
+        
+        
+
+        <!-- Button Filter -->
+        <button type="submit" style="padding: 6px 12px;">Filter</button>
+
+        {% if request.GET.price_range or request.GET.stock or request.GET.category or request.GET.rating %}
+            <a href="?{% if request.GET.q %}q={{ request.GET.q }}{% endif %}" style="padding: 6px 12px; background: #f0f0f0; text-decoration: none;">Reset</a>
+        {% endif %}
+    </form>
+</div>
 
     <!-- Product List -->
     <div class="products-list">
@@ -75,22 +77,22 @@
                     <span class="current-price">Price: ${{ product.price }}</span>
                     <span class="stock-info">Stock: {{ product.stock }} pcs</span>
                 </div>
-
+    
                 <!-- Product Footer -->
                 <div class="product-footer">
                     {% if user.is_authenticated %}
-                        <form action="{% url 'store:add_to_cart' product.id %}" method="post">
-                            {% csrf_token %}
-                            <button type="submit" class="add-to-cart-btn">
-                                Add to Cart
-                            </button>
-                        </form>
-
-                        {% if product.id in has_purchased %}
-                            <a href="{% url 'store:product_detail' product.id %}" class="btn btn-secondary">
-                                Leave a Review!
-                            </a>
-                        {% endif %}
+                    
+                        {% csrf_token %}
+                        <a href="{% url 'store:add_to_cart' product.id %}" class="add-to-cart-btn">
+                            Add to Cart
+                        </a>
+                    
+                        
+                
+                        <!-- Leave a Review button -->
+                        <a href="{% url 'store:product_detail' product.id %}" class="btn btn-secondary">
+                            Leave a Review!
+                        </a>
                     {% else %}
                         <a href="{% url 'store:login' %}?next={{ request.path }}" class="login-prompt">Log in to purchase!</a>
                     {% endif %}
@@ -102,62 +104,49 @@
         {% endfor %}
     </div>
 
+    <!-- Pagination Cards -->
     {% if page_obj.paginator.num_pages > 1 %}
-    <div class="pagination">
-        <span class="step-links">
-            {% if page_obj.has_previous %}
-                <a href="?page=1&q={{ request.GET.q }}{% if request.GET.price_range %}&price_range={{ request.GET.price_range }}{% endif %}{% if request.GET.stock %}&stock={{ request.GET.stock }}{% endif %}">&laquo; first</a>
-                <a href="?page={{ page_obj.previous_page_number }}&q={{ request.GET.q }}{% if request.GET.price_range %}&price_range={{ request.GET.price_range }}{% endif %}{% if request.GET.stock %}&stock={{ request.GET.stock }}{% endif %}">previous</a>
-            {% endif %}
-            <span class="current">
-                Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+    <div class="pagination-card">
+        <div class="pagination">
+            <span class="step-links">
+                {% if page_obj.has_previous %}
+                    <a href="?page=1&q={{ request.GET.q }}{% if request.GET.price_range %}&price_range={{ request.GET.price_range }}{% endif %}{% if request.GET.stock %}&stock={{ request.GET.stock }}{% endif %}">&laquo; First</a>
+                    <a href="?page={{ page_obj.previous_page_number }}&q={{ request.GET.q }}{% if request.GET.price_range %}&price_range={{ request.GET.price_range }}{% endif %}{% if request.GET.stock %}&stock={{ request.GET.stock }}{% endif %}">Previous</a>
+                {% endif %}
+                <span class="current">
+                    Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+                </span>
+                {% if page_obj.has_next %}
+                    <a href="?page={{ page_obj.next_page_number }}&q={{ request.GET.q }}{% if request.GET.price_range %}&price_range={{ request.GET.price_range }}{% endif %}{% if request.GET.stock %}&stock={{ request.GET.stock }}{% endif %}">Next</a>
+                    <a href="?page={{ page_obj.paginator.num_pages }}&q={{ request.GET.q }}{% if request.GET.price_range %}&price_range={{ request.GET.price_range }}{% endif %}{% if request.GET.stock %}&stock={{ request.GET.stock }}{% endif %}">Last &raquo;</a>
+                {% endif %}
             </span>
-            {% if page_obj.has_next %}
-                <a href="?page={{ page_obj.next_page_number }}&q={{ request.GET.q }}{% if request.GET.price_range %}&price_range={{ request.GET.price_range }}{% endif %}{% if request.GET.stock %}&stock={{ request.GET.stock }}{% endif %}">next</a>
-                <a href="?page={{ page_obj.paginator.num_pages }}&q={{ request.GET.q }}{% if request.GET.price_range %}&price_range={{ request.GET.price_range }}{% endif %}{% if request.GET.stock %}&stock={{ request.GET.stock }}{% endif %}">last &raquo;</a>
-            {% endif %}
-        </span>
+        </div>
     </div>
     {% endif %}
 
     <style>
-        .product-description {
-            display: -webkit-box;
-            -webkit-line-clamp: 3;
-            line-clamp: 3;
-            -webkit-box-orient: vertical;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            margin-bottom: 8px;
-            line-height: 1.4;
+        .pagination-card {
+            padding: 15px;
+            background-color: #015bb6;
+            border-radius: 8px;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+            margin-top: 30px;
+            text-align: center;
         }
 
-        .read-more-btn {
-            background: none;
-            border: none;
+        .pagination-card .step-links a {
+            text-decoration: none;
             color: #007bff;
-            cursor: pointer;
-            padding: 0;
-            font-size: 14px;
-            margin-bottom: 10px;
+            padding: 6px 15px;
         }
 
-        .read-more-btn:hover {
-            text-decoration: underline;
-        }
-
-        .price-stock {
-            margin: 10px 0;
+        .pagination-card .step-links .current {
             font-weight: bold;
         }
 
-        .current-price {
-            color: #000989;
-            margin-right: 15px;
-        }
-
-        .stock-info {
-            color: #000989;
+        .pagination-card .step-links a:hover {
+            text-decoration: underline;
         }
     </style>
 

@@ -1,12 +1,16 @@
-/* Reset default browser styles */
+
+/* ========================
+ Reset default browser styles
+======================== */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-
-/* Set base styles for the body */
+/* ========================
+ Set base styles for the body 
+======================== */
 body {
     font-family: 'Poppins', sans-serif;
     line-height: 1.6;
@@ -19,7 +23,9 @@ body {
     min-height: 100vh;
 }
 
-/* Define color palette as CSS variables */
+/* ========================
+ Define color palette as CSS variables 
+======================== */
 :root {
     --primary-color: #006fb9c1;
     --secondary-color: #ff3366;
@@ -33,7 +39,10 @@ body {
 
 
 
-/* Logo inside the navbar */
+/* ========================
+ Logo inside the navbar 
+======================== */
+
 nav .nav-logo {
     height: 100px; 
     margin-right: 20px;
@@ -48,14 +57,20 @@ nav .nav-logo img {
     transition: transform 0.3s ease;
 }
 
-/* Container for nav links */
+/* ========================
+ Container for nav links 
+======================== */
+
 .nav-links {
     display: flex;
     flex-grow: 1;
     justify-content: center;
 }
 
-/* Navigation links list */
+/* ========================
+ Navigation links list 
+======================== */
+
 nav ul {
     list-style: none;
     padding: 0;
@@ -66,7 +81,10 @@ nav ul {
     flex-wrap: nowrap;
 }
 
-/* Individual nav item styling */
+/* ========================
+ Individual nav item styling 
+======================== */
+
 nav ul li {
     margin-right: 20px;
     display: flex;
@@ -74,7 +92,10 @@ nav ul li {
     justify-content: center;
 }
 
-/* Nav link button styles */
+/* ========================
+ Nav link button styles 
+======================== */
+
 nav ul li a {
     color: rgb(206, 216, 232);
     text-decoration: none;
@@ -91,14 +112,20 @@ nav ul li a {
     height: 40px;
 }
 
-/* Hover effect on nav links */
+/* ========================
+ Hover effect on nav links 
+======================== */
+
 nav ul li a:hover {
     color: rgb(74, 72, 177); 
     background-color: #2ecc71; 
     transform: translateY(-3px);
 }
 
-/* Background effect on hover */
+/* ========================
+ Background effect on hover 
+======================== */
+
 nav ul li a::before {
     content: "";
     position: absolute; 
@@ -119,7 +146,10 @@ nav ul li a:hover::before {
 }
 
 
-/* Welcome, user*/
+/* ========================
+ Welcome, user
+======================== */
+
 .welcome-message {
     margin-left: auto;       
     color: rgb(188, 206, 255);            
@@ -132,7 +162,10 @@ nav ul li a:hover::before {
 }
 
 
-/* Product list styles */
+/* ========================
+ Product list styles 
+======================== */
+
 .products-list {
     list-style-type: none;
     padding: 0;
@@ -144,13 +177,16 @@ nav ul li a:hover::before {
 }
 
 
-/* Product card styles */
+/* ========================
+ Product card styles 
+======================== */
+
 .product-item {
     border: 2px solid var(--primary-color);
-    border-radius: 10px;
+    border-radius: 50px;
     padding: 20px;
     margin-bottom: 20px;
-    background-color: #ffffff6e;
+    background-color: #022955c7;     /*#2c5034d9, #881010b5, #480000c9, #001d01c9, #022955c7, #2c3e50  */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     width: calc(33.333% - 20px);
@@ -164,7 +200,12 @@ nav ul li a:hover::before {
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
 
-/* Product image styles */
+
+
+/* ========================
+ Product image styles 
+======================== */
+
 .product-item img {
     width: 100%;
     height: 200px;
@@ -173,38 +214,118 @@ nav ul li a:hover::before {
     border-radius: 5px;
 }
 
-/* "Add to cart" button */
+/* ========================
+ "Add to cart" button 
+======================== */
+
 .add-to-cart-btn {
-    margin-top: auto;
-    padding: 10px 20px;
+    width: 100%; /* Lățime completă */
+    padding: 12px 20px; /* Ajustează padding-ul pentru a face butonul mai mare */
     background-color: var(--primary-color);
     color: white;
     border: none;
-    border-radius: 8px;
+    border-radius: 60px;
     font-size: 1em;
     cursor: pointer;
     transition: background-color 0.3s ease, transform 0.3s ease;
+    display: block; /* Asigură-te că butonul se comportă ca un bloc */
+    margin: 10px 0; /* Margină pentru a da spațiu în jurul butonului */
 }
 
 .add-to-cart-btn:hover {
-    background-color: #0056b3;
+    background-color: #19b15d;
     transform: translateY(-3px);
+    border-radius: 40px; /* Poți păstra acest efect pe hover */
 }
 
-/* Signup form container */
+
+/* ========================
+ Style "Leave a Review" 
+======================== */
+
+.btn.btn-secondary {
+    background-color: #0ba455b7;  
+    color: white;  
+    padding: 10px 16px;  
+    border-radius: 30px;  
+    text-decoration: none;  
+    display: inline-block;
+    width: 100%;
+    transition: background-color 0.3s ease, transform 0.3s ease;  
+}
+
+/* ========================
+ Hover effect for button "Leave a Review" 
+======================== */
+
+.btn.btn-secondary:hover {
+    background-color: #0056b3;  
+    transform: translateY(-3px);  
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);  
+}
+
+
+/* ========================
+ Login to purchase button (user not logged in) 
+======================== */
+
+.login-prompt {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #f0ad4e; 
+    color: white;
+    border: none;
+    border-radius: 30px;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+}
+
+
+
+.login-prompt:hover {
+    background-color: #ec971f; 
+}
+
+
+/* ========================
+ Product_list -> page numbers 
+======================== */
+
+div.pagination-card {
+    width: auto;
+    max-width: 350px;
+    padding: 15px;
+    background-color: #036703be !important; /* Forcing style */
+    border-radius: 30px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    margin-top: 30px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+}
+
+
+/* ========================
+ Signup form container 
+======================== */
+
 
 .signup-container {
     width: 100%;
     max-width: 500px; 
     margin: 0 auto;
     padding: 20px;
-    background-color: #464646;
+    background-color: #ffffff89;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     text-align: center; 
 }
 
-/* Title form */
+
+/* ========================
+ Title form 
+======================== */
+
 h1 {
     text-align: center;
     font-size: 24px;
@@ -212,7 +333,11 @@ h1 {
     margin-bottom: 20px;
 }
 
-/* Error or succes messages */
+
+/* ========================
+ Error or succes messages 
+======================== */
+
 .messages {
     list-style-type: none;
     padding: 0;
@@ -227,13 +352,52 @@ h1 {
     border-radius: 5px;
 }
 
-/* Forms */
+
+/* ========================
+ Sign up card under login form 
+======================== */
+
+.signup-card {
+    background-color: #e0e0e0;
+    border-radius: 6px;
+    padding: 12px 16px;
+    margin-top: 20px;
+    text-align: center;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.signup-card p {
+    margin: 0;
+    color: #222;
+    font-size: 15px;
+}
+
+.signup-card .btn-signup {
+    color: #007bff;
+    font-weight: bold;
+    text-decoration: none;
+    margin-left: 5px;
+}
+
+.signup-card .btn-signup:hover {
+    text-decoration: underline;
+}
+
+
+/* ========================
+ Forms 
+======================== */
+
 form {
     display: flex;
     flex-direction: column;
 }
 
-/* Style text */
+
+/* ========================
+ Style text 
+======================== */
+
 form input {
     width: 100%;
     padding: 10px;
@@ -250,14 +414,22 @@ form input:focus {
     outline: none;
 }
 
-/* Labels */
+
+/* ========================
+ Labels 
+======================== */
+
 form label {
     font-size: 16px;
     color: #333;
     margin-bottom: 5px;
 }
 
-/* Style submit button */
+
+/* ========================
+ Style submit button 
+======================== */
+
 .btn-signup {
     background-color: #006fb9;
     color: rgba(255, 255, 255, 0.708);
@@ -275,15 +447,21 @@ form label {
     background-color: #005b99;
 }
 
-/* Modify help text color */
+
+/* ========================
+ Modify help text color 
+======================== */
+
 .helptext {
     color: rgb(0, 0, 0); 
     font-size: 14px; 
 }
 
 
+/* ========================
+ Container login 
+======================== */
 
-/* Container login */
 form {
     max-width: 400px;
     margin: 0 auto;
@@ -293,14 +471,22 @@ form {
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
   }
   
-  /* Style for heading */
+
+/* ========================
+ Style for heading 
+======================== */
+
   h1 {
     text-align: center;
     margin-bottom: 20px;
     color: #1e90ff;
   }
   
-  /* Login button */
+
+/* ========================
+ Sign UP button 
+======================== */
+  
   button[type="submit"] {
     width: 100%;
     padding: 10px;
@@ -318,22 +504,46 @@ form {
     background-color: #0077cc;
   }
   
-  /* Link under form */
+
+/* ========================
+ Link under form 
+======================== */
+  
   p {
     text-align: center;
     margin-top: 15px;
+    color: #0021a5;
   }
 
 
-/* Contact text 'If you have any questions, feel free to reach out!' */
+/* ========================
+ Contact text 'If you have any questions, feel free to reach out!' 
+======================== */
+
   .contact-text {
-    color:  #07b1fa;
-    font-size: 1.1rem;
+  color: #07b1fa;
+  font-size: 1.1rem;
+  background-color: rgba(255, 255, 255, 0.6); 
+  padding: 10px 15px;
+  border-radius: 6px;
+  display: inline-block;
 }
 
+.contact-container {
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 30px;
+    background-color: #ffffff89;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  }
 
 
-/* Search bar layout */
+/* ========================
+ Search bar layout 
+======================== */
+
 .search-form {
     display: flex;
     align-items: center;
@@ -372,7 +582,10 @@ form {
 }
 
 
-/* Responsive design: tablets and smaller */
+/* ========================
+ Responsive design: tablets and smaller 
+======================== */
+
 @media (max-width: 768px) {
     body {
         background-image: url('/static/store/images/background_3.jpg');
@@ -453,7 +666,11 @@ form {
     }
 }
 
-/* Responsive design: very small screens */
+
+/* ========================
+ Responsive design: very small screens 
+======================== */
+
 @media (max-width: 480px) {
     .nav-logo {
         height: 30px;
@@ -469,13 +686,21 @@ form {
     }
 }
 
-/* Accessibility: focus effect */
+
+/* ========================
+ Accessibility: focus effect 
+======================== */
+
 a:focus, button:focus, input:focus {
     outline: 2px solid var(--secondary-color);
     outline-offset: 2px;
 }
 
-/* Fade-in animation */
+
+/* ========================
+ Fade-in animation 
+======================== */
+
 @keyframes fadeIn {
     from { opacity: 0; }
     to { opacity: 1; }
@@ -485,7 +710,11 @@ a:focus, button:focus, input:focus {
     animation: fadeIn 0.5s ease-in-out;
 }
 
-/* Truncate product descriptions */
+
+/* ========================
+ Truncate product descriptions 
+======================== */
+
 .product-description {
     display: -webkit-box;
     -webkit-line-clamp: 3; 
@@ -495,23 +724,47 @@ a:focus, button:focus, input:focus {
     margin-bottom: 5px;
 }
 
-/* Read more button */
-.read-more {
-    color: var(--primary-color);
-    background: none;
+
+/* ========================
+ Read more button 
+======================== */
+
+.read-more-btn {
+    background-color: #007bff; 
+    color: white; 
     border: none;
+    padding: 8px 16px; 
     cursor: pointer;
-    font-size: 0.9em;
-    padding: 0;
-    text-decoration: underline;
+    font-size: 1em;
+    border-radius: 20px; 
+    text-decoration: none;
+    display: inline-block;
+    margin-top: 10px;
 }
 
-.read-more:hover {
-    color: var(--secondary-color);
+
+/* ========================
+ Read More Style 
+======================== */
+
+.read-more-btn:hover {
+    background-color: #0056b3; 
 }
 
 
-/* Weather widget container */
+/* ========================
+ Butonul Show Less 
+======================== */
+
+.show-less {
+    display: none; 
+}
+
+
+/* ========================
+ Weather widget container 
+======================== */
+
 .weather-info {
     text-align: center;
 }
@@ -544,7 +797,10 @@ a:focus, button:focus, input:focus {
 }
 
 
-/* Welcome_text */
+/* ========================
+ Welcome_text 
+======================== */
+
 .home-welcome {
     background-color: rgba(16, 167, 114, 0.493); 
     padding: 40px; 
@@ -570,8 +826,10 @@ a:focus, button:focus, input:focus {
 
 
 
+/* ========================
+ Navigation bar 
+======================== */
 
-/* Navigation bar */
 .navbar {
     display: flex;
     flex-direction: column;
@@ -579,7 +837,11 @@ a:focus, button:focus, input:focus {
     position: relative;
 }
 
-/* Hamburger menu */
+
+/* ========================
+ Hamburger menu 
+======================== */
+
 .hamburger {
     display: none;
     flex-direction: column;
@@ -599,7 +861,11 @@ a:focus, button:focus, input:focus {
     transition: all 0.3s ease-in-out;
 }
 
-/* Hamburger Animation X */
+
+/* ========================
+ Hamburger Animation X 
+======================== */
+
 .hamburger.active span:nth-child(1) {
     transform: rotate(45deg) translate(5px, 5px);
 }
@@ -610,7 +876,11 @@ a:focus, button:focus, input:focus {
     transform: rotate(-45deg) translate(5px, -5px);
 }
 
-/* Hidden navigation menu on mobile */
+
+/* ========================
+ Hidden navigation menu on mobile 
+======================== */
+
 .navbar-menu {
     display: flex;
     list-style: none;
@@ -620,7 +890,11 @@ a:focus, button:focus, input:focus {
     width: 100%;
 }
 
-/* Menu that opens */
+
+/* ========================
+ Menu that opens 
+======================== */
+
 .navbar-menu.show {
     display: flex;
     flex-direction: column;
@@ -632,7 +906,11 @@ a:focus, button:focus, input:focus {
     padding: 10px 0;
 }
 
-/* Style for menu links */
+
+/* ========================
+ Style for menu links 
+======================== */
+
 .navbar-menu li {
     margin: 10px 0;
     text-align: center;
@@ -645,7 +923,11 @@ a:focus, button:focus, input:focus {
     display: block;
 }
 
-/* Hover for menu links */
+
+/* ========================
+ Hover for menu links 
+======================== */
+
 .navbar-menu li a:hover {
     background-color: var(--secondary-color);
 }
@@ -659,7 +941,10 @@ a:focus, button:focus, input:focus {
 }
 
 
-/* Navigation bar styles */
+/* ========================
+ Navigation bar styles 
+======================== */
+
 nav {
     background: rgba(54, 192, 132, 0.61);
     padding: 8px 20px;
@@ -674,7 +959,11 @@ nav {
 }
 
 
-/* Media Query small devices */
+
+/* ========================
+ Media Query small devices 
+======================== */
+
 @media screen and (max-width: 768px) {
 
     .hamburger {
@@ -712,26 +1001,123 @@ nav {
 }
 
 
-/*REVIEW*/
-.product-actions button {
-    margin-top: 10px;
-    padding: 10px;
-    font-size: 16px;
-}
 
-.reviews-container {
-    margin-top: 20px;
-}
 
-.review-item {
-    border-bottom: 1px solid #ddd;
-    padding-bottom: 10px;
-    margin-bottom: 10px;
+
+/* ========================
+ Cart change color of product name 
+======================== */
+
+.product-name {
+    color: #0400f9; 
+    font-weight: bold;
+    text-align: center;
+    
 }
 
 
+/* ========================
+ Cart change color of product price, each, name and total price 
+======================== */
 
-/*Number of products in Cart navbar in red circle*/
+.product-price {
+    color: #0400f9;  
+    font-weight: bold;
+    text-align: center;
+    
+}
+
+.price-each {
+    color: #0400f9;  
+    font-weight: bold;
+    text-align: center;
+    
+}
+
+.total-price {
+    color: #0400f9;  
+    font-weight: bold;  
+    font-size: 1.5em;  
+    text-align: center;
+}
+
+.item-info {
+    text-align: center;
+}
+
+
+/* ========================
+ Container for Quantity, Update & Remove 
+======================== */
+.update-remove-card {
+    display: flex;
+    flex-direction: column;
+    
+
+
+/* ========================
+ Eliminate any card style" 
+======================== */
+    
+    background-color: transparent; 
+    border: none;                  
+    box-shadow: none;              
+}
+
+
+/* ========================
+ Form for Quantity și Update 
+======================== */
+
+.update-remove-card form {
+    display: flex;
+    flex-direction: column;
+    background: transparent; 
+    border: none;
+    box-shadow: none;
+    width: 100%;
+}
+
+
+/* ========================
+ Buttons (Update și Remove) 
+======================== */
+
+.update-remove-card button {
+    padding: 8px 16px;
+    border: 1px solid #ccc;
+    border-radius: 30px;
+    cursor: pointer;
+    background: #0d09e786; 
+    color: #333;
+}
+
+
+/* ========================
+ Remove button
+======================== */
+
+.btn-danger {
+    background-color: #ff6666;
+    color: white;
+    border: none;
+}
+
+
+/* ========================
+ Hover 
+======================== */
+
+.update-remove-card button:hover, .btn-danger:hover {
+    background-color: #e0e0e0;
+}
+
+
+
+/* ========================
+ Number of products in Cart navbar in red circle
+======================== */
+
 .cart-link {
     position: relative;
     display: inline-block;
@@ -751,4 +1137,206 @@ nav {
     min-width: 20px;
     text-align: center;
     z-index: 10;
+}
+
+
+
+/* ========================
+ Proceed to checkout button style 
+======================== */
+
+.checkout-button {
+    background-color: #007d04 !important; 
+    color: white; 
+    border: none;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    border-radius: 30px !important;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.checkout-button:hover {
+    background-color: #000b88 !important; 
+}
+
+
+.checkout-form {
+    background: none;      
+    box-shadow: none;      
+    padding: 0;            
+    margin-top: 20px auto;  
+    text-align:vcenter;           
+    border: none;          
+}
+
+
+
+/* ========================
+ Store cart style  
+======================== */
+
+.cart-card, .buy-more-card {
+    background-color: #d9ffceb3;
+    border-radius: 30px;
+    padding: 20px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+}
+
+
+/* ========================
+ Buy More button card  from store/cart 
+======================== */
+
+.buy-more-card {
+    background-color: #f9f9f9;
+    border: 2px solid #007bff;
+    border-radius: 30px;
+    padding: 20px;
+    margin-top: 30px;
+    text-align: center;
+    max-width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+
+/* ========================
+ Color title  
+======================== */
+
+.buy-more-card h3 {
+    color: #333333; 
+    margin-bottom: 10px;
+}
+
+
+.btn-buy-more {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #007bff9a;
+    color: #ffffff8e;
+    text-decoration: none;
+    border-radius: 30px;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+.btn-buy-more:hover {
+    background-color: #0056b3;
+}
+
+
+
+/* ========================
+ Checkout detail text is in checkout.html 
+======================== */
+
+
+
+
+/* ========================
+ Store Checkout and payment style 
+======================== */
+
+.checkout-container {
+    background-color: white;
+    padding: 30px;
+    margin: 40px auto;
+    max-width: 800px;
+    border-radius: 20px;
+    box-shadow: 0 0 15px rgba(0,0,0,0.1);
+}
+
+
+
+/* ========================
+ order_confirmation style 
+======================== */
+
+.confirmation-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.1); 
+}
+
+.confirmation-card {
+    background-color: rgba(255, 255, 255, 0.799); 
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    width: 90%;
+    max-width: 600px;
+    text-align: center;
+    color: #333333; 
+}
+
+.confirmation-card h1 {
+    font-size: 2.5rem; 
+    color: #001df978;
+    margin-bottom: 15px; 
+}
+
+.confirmation-card p,
+.confirmation-card h2,
+.confirmation-card h3 {
+    font-size: 1.1rem;
+    color: #010734; 
+    margin-bottom: 15px; 
+}
+
+.confirmation-card ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.confirmation-card li {
+    font-size: 1rem;
+    color: #010734; 
+    margin-bottom: 10px; 
+}
+
+
+/* ========================
+ Fundal pentru containerul linkurilor 
+======================== */
+
+.confirmation-links {
+    margin-top: 20px; 
+    background-color: rgba(0, 123, 255, 0.559); 
+    padding: 15px; 
+    border-radius: 30px; 
+}
+
+
+/* ========================
+ Fundal pentru fiecare link 
+======================== */
+
+.confirmation-links a {
+    font-size: 1.1rem;
+    text-decoration: none;
+    color: #ffffff;
+    transition: color 0.3s, background-color 0.3s; 
+    margin: 0 10px; 
+    padding: 10px 15px; 
+    border-radius: 30px; 
+}
+
+
+/* ========================
+ Fundal schimbat la hover pe fiecare link 
+======================== */
+
+.confirmation-links a:hover {
+    color: #fff; 
+    background-color: #0150a4; 
 }

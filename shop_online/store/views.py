@@ -5,7 +5,7 @@ from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator
 from .forms import SignUpForm, ProfileForm, ReviewForm
-from .models import Cart, CartItem, OrderItem, Product, Order, Category, Review
+from .models import Cart, CartItem, OrderItem, Product, Order, Category
 from django.http import HttpResponse, JsonResponse
 from django.db.models import Q
 from django.conf import settings
@@ -72,7 +72,7 @@ def get_weather_data(city):
 def get_user_city(request):
     if request.user.is_authenticated and hasattr(request.user, 'profile'):
         # Verify if user has profile & city set
-        return getattr(request.user.profile, 'city', None)  # Returnăm orașul setat în profilul utilizatorului
+        return getattr(request.user.profile, 'city', None)  
     return None  # No profile or user not logged in , return None .
 
 
@@ -98,21 +98,21 @@ def search_products(request):
 def home(request):
     weather = get_weather_data(get_user_city(request))
     
-    # Calculăm numărul de produse din coș doar dacă utilizatorul este autentificat
+    # Calculate the number of items in the cart for authenticated users
     if request.user.is_authenticated:
         cart = Cart.objects.filter(user=request.user).first()
         if cart:
             items = cart.items.all()
-            item_count = sum(item.quantity for item in items)  # Numărul total de produse
+            item_count = sum(item.quantity for item in items)  # Total items in cart
         else:
-            item_count = 0  # Dacă nu există coș, numărul de produse este 0
+            item_count = 0  # If no cart exists, set item count to 0
     else:
-        item_count = 0  # Dacă utilizatorul nu este autentificat, setăm numărul de produse la 0
+        item_count = 0  # If user is not authenticated, set item count to 0
     
     return render(request, 'store/home.html', {
         'weather': weather['weather'],
         'weather_error': weather['weather_error'],
-        'item_count': item_count,  # Trimit numărul de produse
+        'item_count': item_count,  # Send the item count to the template
     })
 
 
@@ -133,12 +133,11 @@ def product_list(request):
     stock_filter = request.GET.get('stock')
     category_name = request.GET.get('category')
     query = request.GET.get('q', '')
-
+    
 
     # Fetch all categories
     categories = Category.objects.all()
 
-    
     # Filters for price range
     if price_range:
         if price_range == '0-100':
@@ -172,13 +171,50 @@ def product_list(request):
             Q(description__icontains=query)
         )
 
-    # Sort products by name
+
+
+    # Sort products by name (or any other field you prefer)
     products = products.order_by('name')
 
     # Pagination
     paginator = Paginator(products, 12)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
+
+
+    # Create a dictionary to check if the user has purchased each product
+    has_purchased = {}
+
+    # Verifi if user is authenticated
+    if request.user.is_authenticated:
+        # Verify if user has purchased products
+        orders = Order.objects.filter(user=request.user)
+        purchased_product_ids = OrderItem.objects.filter(order__in=orders).values_list('product_id', flat=True)
+        purchased_products = Product.objects.filter(id__in=purchased_product_ids)
+
+        # Create a dictionary to check if the user has purchased each product
+        for product in products:
+            has_purchased[product.id] = product in purchased_products
+
+    # Obtain weather forecast for the authenticated user
+    weather = get_authenticated_weather(request)
+    
+
+    # Return products list template with context
+    return render(request, 'store/product_list.html', {
+        'page_obj': page_obj,
+        'message': request.GET.get('message', ''),
+        'active_price_range': price_range,
+        'active_stock_filter': stock_filter,
+        'active_category': category_name,
+        'search_query': query,
+        'weather': weather['weather'],
+        'weather_error': weather.get('error', None),
+        'has_purchased': has_purchased,
+})
+
+
+
 
     # Creates a dictionary to check if the user has purchased the product
     has_purchased = {}
@@ -221,16 +257,22 @@ def cart_view(request):
         items = cart.items.all()
         total = sum(item.get_total_price() for item in items)  
         item_count = sum(item.quantity for item in items)
+        
+        # Verify if any item has zero stock
+        has_zero_stock = any(item.product.stock < item.quantity for item in items)
     else:
         items = []
         total = 0
         item_count = 0
+        has_zero_stock = False  
 
     return render(request, 'store/cart.html', {
         'items': items,
         'total': total,               
         'item_count': item_count,
+        'has_zero_stock': has_zero_stock,  
     })
+
 
 
 
@@ -243,9 +285,9 @@ def create_user_profile(user):
             profile = Profile(user=user)
             profile.save()
         except IntegrityError:
-            print(f"Profilul pentru utilizatorul {user.username} există deja.")
+            print(f"User profile {user.username} already exists.")
     else:
-        print(f"Profilul pentru utilizatorul {user.username} există deja.")
+        print(f"User profile {user.username} already exists.")
 
 
 # User registration view with custom profile form
