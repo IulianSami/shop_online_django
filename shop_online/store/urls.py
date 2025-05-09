@@ -29,4 +29,12 @@ urlpatterns = [
     path('products/<int:product_id>/', views.product_detail, name='product_detail'),
     path('terms/', views.agree_terms_and_conditions, name='agree_terms_and_conditions'),
     path('terms/success/', views.terms_success, name='terms_success'),
+    path('about/', views.about_view, name='about'),
+    path('privacy-policy/', views.privacy_policy_view, name='privacy_policy'),
+    path('subscribe-newsletter/', views.subscribe_newsletter, name='subscribe_newsletter'),
+    path('terms-and-conditions/', views.terms_and_conditions_view, name='terms_and_conditions'),
+    path('faq/', views.faq_view, name='faq'),
+    path('payment-methods/', views.payment_methods, name='payment_methods'),
+    
+    
 ]

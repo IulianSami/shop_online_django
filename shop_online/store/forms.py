@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth.models import User
-from .models import Profile, Review
+from .models import Profile, Review, NewsletterSubscriber  # Import the models to use in the forms
 
 
 
@@ -67,3 +67,10 @@ class AgreeTermsForm(forms.Form):
         label="I agree to the terms and conditions",
         required=True
     )
+
+
+# Newsletter Subscription Form
+class NewsletterForm(forms.ModelForm):
+    class Meta:
+        model = NewsletterSubscriber
+        fields = ['email']

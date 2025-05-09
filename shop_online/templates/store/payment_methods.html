@@ -1,0 +1,25 @@
+{% extends 'store/base.html' %}
+
+{% load static %}
+
+{% block title %}Payment Methods{% endblock %}
+
+{% block content %}
+  <div class="payment-methods-container">
+    <div class="payment-methods-card">
+      <h1>Payment Methods</h1>
+      <p>We accept the following payment methods:</p>
+
+      <!-- Container pentru imagini -->
+      <div class="payment-methods-images">
+        <img src="{% static 'store/images/payment_icons/visa mastercard.png' %}" alt="Visa Mastercard">
+        <img src="{% static 'store/images/payment_icons/paypal.png' %}" alt="PayPal">
+        <img src="{% static 'store/images/payment_icons/banktransfer.png' %}" alt="BankTransfer">
+        <img src="{% static 'store/images/payment_icons/cashondelivery.png' %}" alt="CashOnDelivery">
+      </div>
+
+      <h2>Secure Transactions</h2>
+      <p>Your payment information is encrypted using SSL/TLS technology to ensure that your transaction is safe and secure.</p>
+    </div>
+  </div>
+{% endblock %}

@@ -14,7 +14,7 @@ import requests
 from django.contrib.auth.views import LoginView
 from .models import Profile
 from django.core.mail import send_mail
-from .forms import AgreeTermsForm
+from .forms import AgreeTermsForm, NewsletterForm  # Import the form for newsletter subscription
 #from .forms import ContactForm  # if use form Django
 
 
@@ -330,6 +330,10 @@ def signup(request):
 
 # View showing checkout page with item validation and weather info
 def checkout_view(request):
+    if not request.user.is_authenticated:
+        messages.warning(request, "Please log in to proceed to checkout.")
+        return redirect('store:login')  # sau 'store:home' sau orice alt view ai pentru login
+
     cart = Cart.objects.filter(user=request.user).first()
     if not cart:
         return redirect('store:cart_view')
@@ -341,7 +345,7 @@ def checkout_view(request):
     if has_zero_stock:
         return redirect('store:cart_view')
 
-    weather = get_authenticated_weather(request) 
+    weather = get_authenticated_weather(request)
 
     return render(request, 'store/checkout.html', {
         'items': items,
@@ -682,3 +686,33 @@ def base_view(request):
     cart_items_count = len(request.session.get('cart', {}))  # If using session to store cart items
 
     return render(request, 'base.html', {'cart_items_count': cart_items_count})
+
+
+# About page view
+def about_view(request):
+    return render(request, 'store/about.html')
+
+#Privacy policy page view
+def privacy_policy_view(request):
+    return render(request, 'store/privacy_policy.html')
+
+# Newsletter subscription view
+def subscribe_newsletter(request):
+    if request.method == 'POST':
+        form = NewsletterForm(request.POST)
+        if form.is_valid():
+            form.save()
+    return redirect(request.META.get('HTTP_REFERER', '/'))
+
+# View for terms and conditions page
+def terms_and_conditions_view(request):
+    return render(request, 'store/agree_terms_and_conditions.html')
+
+# View for terms and conditions page
+def faq_view(request):
+    return render(request, 'store/faq.html')  # or any file you have for FAQ
+
+
+# Payment methods page view
+def payment_methods(request):
+    return render(request, 'store/payment_methods.html')

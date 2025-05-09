@@ -1340,3 +1340,306 @@ nav {
     color: #fff; 
     background-color: #0150a4; 
 }
+
+
+
+/* ========================
+ Footer style via base.html
+======================== */
+
+.site-footer {
+    background-color: #222;
+    color: #f1f1f1;
+    padding: 30px 20px;
+    text-align: center;
+    font-size: 0.9em;
+    margin-top: 60px;
+    border-radius: 30px 30px 30px 30px;
+}
+
+.site-footer .footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.site-footer .footer-links {
+    margin-top: 15px;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 20px; /* Spațiere între linkuri */
+}
+
+.site-footer .footer-links a {
+    color: #bbb;
+    margin: 0 12px;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.site-footer .footer-links a:hover {
+    color: #fff;
+    text-decoration: underline;
+}
+
+
+
+html, body {
+    height: 100%;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.content-container {
+    flex: 1;
+}
+
+
+/* ========================
+ About page style
+======================== */
+
+.about-card {
+    background-color: #1600a7c9; /*#2c5034d9, #881010b5, #480000c9, #001d01c9, #022955c7, #2c3e50  */
+    border-radius: 30px;
+    padding: 30px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    max-width: 800px;
+    margin: 50px auto;
+    text-align: center;
+}
+
+.about-card h1 {
+    font-size: 2.5em;
+    color: #0498fbc9;
+    margin-bottom: 20px;
+}
+
+.about-card p {
+    font-size: 1.1em;
+    color: #ffffff;
+    line-height: 1.6;
+}
+
+
+/* ========================
+Privacy Policy page style
+======================== */
+
+/* Privacy Policy Card */
+.privacy-policy-card {
+    background-color: #1600a7c9;
+    border-radius: 30px;
+    padding: 30px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    max-width: 900px;
+    margin: 50px auto;
+    text-align: left;
+}
+
+/* Title Style */
+.privacy-policy-card h1 {
+    font-size: 2.5em;
+    color: #0498fbc9;
+    margin-bottom: 20px;
+}
+
+/* Subtitle Style */
+.privacy-policy-card h2 {
+    font-size: 1.8em;
+    color: #0498fbc9;
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+/* Text Style */
+.privacy-policy-card p {
+    font-size: 1.1em;
+    color: #fffbfb;
+    line-height: 1.6;
+}
+
+/* Add some spacing for better readability */
+.privacy-policy-card h1, .privacy-policy-card h2, .privacy-policy-card p {
+    margin-bottom: 20px;
+}
+
+/* Optional: Style for any links inside the Privacy Policy */
+.privacy-policy-card a {
+    color: var(--primary-color);
+    text-decoration: none;
+}
+
+.privacy-policy-card a:hover {
+    text-decoration: underline;
+}
+
+
+
+/* ========================
+Footer Icons and Links
+======================== */
+
+
+/* Footer */
+.footer {
+    background-color: #222222;
+    color: white;
+    padding: 20px 0;
+    text-align: center;
+    border-radius: 30px;
+}
+
+.footer .footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.social-media-icons {
+    display: flex;
+    justify-content: center;
+    gap: 20px;  /* Distanta intre pictograme */
+    margin-top: 5px;
+}
+
+.social-media-icons a {
+    color: white;
+    font-size: 1.8em;
+    transition: color 0.3s ease;
+}
+
+.social-media-icons a:hover {
+    color: #19b15d; /* Culoare la hover */
+}
+
+.social-media-icons i {
+    margin: 0 10px;
+}
+
+
+
+/* ========================
+Footer Newsletter Signup
+======================== */
+
+.newsletter-signup {
+    text-align: center;
+    margin-top: 20px;
+    color: white;
+}
+
+.newsletter-signup p {
+    font-size: 1.2em;
+    margin-bottom: 10px;
+}
+
+.newsletter-signup form {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.newsletter-signup input[type="email"] {
+    padding: 10px;
+    border-radius: 30px;
+    border: none;
+    width: 250px;
+    max-width: 100%;
+}
+
+.newsletter-signup button {
+    padding: 10px 20px;
+    border-radius: 30px;
+    border: none;
+    background-color: #19b15d;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.newsletter-signup button:hover {
+    background-color: #14a14f;
+}
+
+
+
+/* ========================
+Footer Contact Information
+======================== */
+
+.contact-info p {
+    color: white;
+    font-size: 1.2em;
+    margin-top: 10px;
+}
+
+.contact-info a {
+    color: #19b15d; /* Link color */
+    text-decoration: none;
+}
+
+.contact-info a:hover {
+    text-decoration: underline;
+}
+
+
+
+
+/* ========================
+Footer Method of Payment page style
+======================== */
+
+
+.payment-methods-card {
+    background-color: #fff;
+    border: 1px solid #fb5757;
+    border-radius: 30px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin: 20px auto;
+    max-width: 800px;
+}
+
+.payment-methods-card h1 {
+    font-size: 2em;
+    margin-bottom: 15px;
+    color:rgb(74, 72, 177)
+}
+
+.payment-methods-card h2 {
+    font-size: 1.5em;
+    margin-top: 30px;
+    margin-bottom: 10px;
+    color:rgb(74, 72, 177)
+}
+
+.payment-methods-card ul {
+    list-style-type: none;
+    padding: 0;
+    color:rgb(74, 72, 177)
+}
+
+.payment-methods-card ul li {
+    font-size: 1.1em;
+    margin-bottom: 10px;
+}
+
+.payment-methods-card p {
+    font-size: 1.1em;
+    line-height: 1.6;
+}
+
+
+.payment-methods-images {
+    display: grid;  
+    grid-template-columns: repeat(2, 1fr);  
+    gap: 20px;  
+    margin-top: 20px;
+  }
+  
+  .payment-methods-images img {
+    width: 100%;  
+    object-fit: contain; 
+  }

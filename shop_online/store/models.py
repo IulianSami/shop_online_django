@@ -157,3 +157,11 @@ class OrderItem(models.Model):
     def get_total_price(self):
         return self.quantity * self.price  # Price of the order item
     
+
+# Model for Footer Newsletter Subscription
+class NewsletterSubscriber(models.Model):
+    email = models.EmailField(unique=True)
+    subscribed_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.email

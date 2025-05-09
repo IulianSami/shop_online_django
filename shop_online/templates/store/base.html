@@ -9,6 +9,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="icon" href="{% static 'store/images/favicon.ico' %}" type="image/x-icon">
     <link rel="stylesheet" href="{% static 'store/css/base.css' %}">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
     
 </head>
 <body>
@@ -111,7 +112,73 @@
         resetTimer();
     </script>
 
+<footer class="site-footer">
+    <div class="footer-content">
         
+        <nav class="footer-links">
+            <a href="{% url 'store:about' %}">About</a>
+            <a href="{% url 'store:contact' %}">Contact</a>
+            <a href="/terms">Terms & Conditions</a>
+            <a href="{% url 'store:privacy_policy' %}">Privacy Policy</a>
+            <a href="{% url 'store:payment_methods' %}">Payment Methods</a>
+        </nav>
+    </div>
+</footer> 
+
+<footer class="footer">
+    <div class="footer-content">
+       
+        <!-- Newsletter Signup -->
+        <div class="newsletter-signup">
+            <p>Subscribe to our newsletter</p>
+            <form method="post" action="{% url 'store:subscribe_newsletter' %}">
+                {% csrf_token %}
+                <input type="email" name="email" placeholder="Enter your email" required>
+                <button type="submit">Subscribe</button>
+            </form>
+        </div>
+
+        <!-- Social Media Icons -->
+        <div class="social-media-icons">
+            <!-- Facebook -->
+            <a href="https://www.facebook.com" target="_blank" aria-label="Facebook">
+                <i class="fab fa-facebook-f"></i>
+            </a>
+            
+            <!-- Instagram -->
+            <a href="https://www.instagram.com" target="_blank" aria-label="Instagram">
+                <i class="fab fa-instagram"></i>
+            </a>
+
+            <!-- WhatsApp -->
+            <a href="https://wa.me/yourphonenumber" target="_blank" aria-label="WhatsApp">
+                <i class="fab fa-whatsapp"></i>
+            </a>
+
+            <!-- Twitter -->
+            <a href="https://www.twitter.com" target="_blank" aria-label="Twitter">
+                <i class="fab fa-twitter"></i>
+            </a>
+        </div>
+
+        <!-- Contact Info -->
+        <div class="contact-info">
+            <p>Email: <a href="mailto:iuliansami@gmail.com">iuliansami@gmail.com</a></p>
+            <p>Phone: <a href="tel:+40740372392">+0 (740) 372-392</a></p>
+        </div>
+
+        
+    </div>
+</footer>
+
+{% load tz %}
+
+<footer>
+  <div class="footer-content">
+    <!-- Alte elemente din footer -->
+    <p>&copy; {% now "Y" %} Shop Online. All rights reserved.</p>
+  </div>
+</footer>
 
 </body>
 </html>

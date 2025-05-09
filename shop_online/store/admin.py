@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.utils.translation import gettext_lazy as _  # Import translation utility for multilingual support
 from django.utils.html import format_html  # Import HTML formatting utility
-from .models import Product, Category, Cart, CartItem, Profile, Review  # Import the models to register them in the admin panel
+from .models import Product, Category, Cart, CartItem, Profile, Review, NewsletterSubscriber  # Import the models to register them in the admin panel
 
 # Custom filter for stock status
 class StockFilter(admin.SimpleListFilter):
@@ -104,3 +104,10 @@ class ProfileAdmin(admin.ModelAdmin):
 class ReviewAdmin(admin.ModelAdmin):
     list_display = ('product', 'user', 'rating', 'created_at')
     list_filter = ('product', 'rating')
+
+
+# Registration Newsletter Subscriber model in admin panel
+@admin.register(NewsletterSubscriber)
+class NewsletterSubscriberAdmin(admin.ModelAdmin):
+    list_display = ('email', 'subscribed_at')  # afișează coloane în admin
+    search_fields = ('email',)
