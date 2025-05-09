@@ -36,6 +36,8 @@ urlpatterns = [
     path('accounts/', include('django.contrib.auth.urls')),  # URLs for authentication (login, password reset, ...)
     path('accounts/signup/', views.signup, name='signup'),  # URL for the user registration page
     path('terms/', views.agree_terms_and_conditions, name='agree_terms_and_conditions'),
+    path('test-email/', views.test_email, name='test_email'),
+    path('store/contact/', views.contact, name='contact'),
     
     
     

@@ -15,6 +15,7 @@ from django.contrib.auth.views import LoginView
 from .models import Profile
 from django.core.mail import send_mail
 from .forms import AgreeTermsForm, NewsletterForm  # Import the form for newsletter subscription
+from sendgrid.helpers.mail import Mail
 #from .forms import ContactForm  # if use form Django
 
 
@@ -578,7 +579,7 @@ def contact(request):
 
         subject = f"Contact Message from {name}"
         message_body = f"Message from {name} ({email}):\n\n{message}"
-        admin_email = 'iuliansami@gmail.com'
+        admin_email = 'iuliansami@gmail.com'  # Adresa de email a administratorului
 
         try:
             send_mail(
@@ -591,22 +592,30 @@ def contact(request):
             messages.success(request, 'Your message has been sent successfully!')
             return redirect('store:contact')
         except Exception as e:
-            messages.error(request, 'There was an error sending your message. Please try again later.')
+            messages.error(request, f'There was an error sending your message: {str(e)}')
             return redirect('store:contact')
     else:
         return render(request, 'store/contact.html')
 
 
+
+
 # Email testing
 def test_email(request):
-    send_mail(
-        'Test Subject',
-        'Test Message',
-        'from@example.com',
-        ['to@example.com'],
-        fail_silently=False,
+    message = Mail(
+        from_email="iuliansami@gmail.com",  # Adresa de expeditor
+        to_emails="iuliansami@gmail.com",  # Adresa de destinatar
+        subject="Test Email via SendGrid",
+        plain_text_content="Text message sent from Django with SendGrid.",
     )
-    return HttpResponse('Email sent successfully!')
+    
+    try:
+        response = sg.send(message)
+        return HttpResponse(f"Email sent! Status code: {response.status_code}")
+    except Exception as e:
+        return HttpResponse(f"An error occurred: {str(e)}")
+    
+
 
 
 #Review view for product detail page
