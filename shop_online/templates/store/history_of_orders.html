@@ -1,0 +1,60 @@
+{% extends 'store/base.html' %}
+
+{% block title %}Order History{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h2>History of Orders</h2>
+
+    {% if orders %}
+        <div class="card">
+            <div class="card-header">
+                <h4>Order Details</h4>  <!-- Title in card -->
+            </div>
+            <div class="card-body">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Order ID</th>
+                            <th>Product</th>
+                            <th>Quantity</th>
+                            <th>Price</th>
+                            <th>Order Date</th>
+                            <th>User</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for order in orders %}
+                            <tr>
+                                <td>{{ order.id }}</td>
+                                <td>
+                                    {% for item in order.items.all %}
+                                        <strong>{{ item.product.name }}</strong> <!-- Title product -->
+                                        <br>
+                                    {% endfor %}
+                                </td>
+                                <td>
+                                    {% for item in order.items.all %}
+                                        {{ item.quantity }}
+                                        <br>
+                                    {% endfor %}
+                                </td>
+                                <td>
+                                    {% for item in order.items.all %}
+                                        {{ item.get_total_price }} 
+                                        <br>
+                                    {% endfor %}
+                                </td>
+                                <td>{{ order.created_at }}</td>
+                                <td>{{ order.user.username }}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    {% else %}
+        <p>No orders found.</p>
+    {% endif %}
+</div>
+{% endblock %}

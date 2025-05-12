@@ -5,23 +5,33 @@ from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator
 from .forms import SignUpForm, ProfileForm, ReviewForm
-from .models import Cart, CartItem, OrderItem, Product, Order, Category
+from .models import Cart, CartItem, OrderItem, Product, Order, Category, Profile
 from django.http import HttpResponse, JsonResponse
 from django.db.models import Q
 from django.conf import settings
 from django.db import IntegrityError
 import requests
 from django.contrib.auth.views import LoginView
-from .models import Profile
 from django.core.mail import send_mail
 from .forms import AgreeTermsForm, NewsletterForm  # Import the form for newsletter subscription
 from sendgrid.helpers.mail import Mail
-#from .forms import ContactForm  # if use form Django
+import os # used for using sendgrid APY KEY and SMTP 
+import ssl # for using sendgrid APY KEY
+import sendgrid # for using sendgrid APY KEY
+from sendgrid import SendGridAPIClient # for using sendgrid SMTP
 
 
 
 
+def history_of_orders(request):
+    # Verify if user is authenticated
+    if not request.user.is_authenticated:
+        return redirect('store:login')  # Redirect to login page if not authenticated
 
+    # Take orders for the authenticated user	
+    orders = Order.objects.all()  # Without filtering by user, to show all orders
+
+    return render(request, 'store/history_of_orders.html', {'orders': orders})
 
 
 
@@ -333,7 +343,7 @@ def signup(request):
 def checkout_view(request):
     if not request.user.is_authenticated:
         messages.warning(request, "Please log in to proceed to checkout.")
-        return redirect('store:login')  # sau 'store:home' sau orice alt view ai pentru login
+        return redirect('store:login')  
 
     cart = Cart.objects.filter(user=request.user).first()
     if not cart:
@@ -570,28 +580,64 @@ def custom_logout(request):
 
 
 
-# Contact form view to send email to admin
+# Contact form view to send email to admin   with SMTP
+# def contact(request):
+#     if request.method == 'POST':
+#         name = request.POST.get('name')
+#         email = request.POST.get('email')
+#         message = request.POST.get('message')
+
+#         subject = f"Contact Message from {name}"
+#         message_body = f"Message from {name} ({email}):\n\n{message}"
+#         admin_email = 'iuliansami@gmail.com'  # email address of the admin
+
+#         try:
+#             send_mail(
+#                 subject,
+#                 message_body,
+#                 settings.DEFAULT_FROM_EMAIL,
+#                 [admin_email],
+#                 fail_silently=False,
+#             )
+#             messages.success(request, 'Your message has been sent successfully!')
+#             return redirect('store:contact')
+#         except Exception as e:
+#             messages.error(request, f'There was an error sending your message: {str(e)}')
+#             return redirect('store:contact')
+#     else:
+#         return render(request, 'store/contact.html')
+
+
+
+# Contact form view to send email to admin   with API KEY
 def contact(request):
     if request.method == 'POST':
+        # Take data from the form
         name = request.POST.get('name')
         email = request.POST.get('email')
         message = request.POST.get('message')
 
         subject = f"Contact Message from {name}"
         message_body = f"Message from {name} ({email}):\n\n{message}"
-        admin_email = 'iuliansami@gmail.com'  # Adresa de email a administratorului
+        admin_email = 'iuliansami@gmail.com'  # Email Address of the admin
+
+        # Construct SendGrid API client
+        sg = SendGridAPIClient(os.getenv("SENDGRID_API_KEY"))
+        message = Mail(
+            from_email=email,  # Using the sender's email
+            to_emails=admin_email,  # Admin email
+            subject=subject,
+            plain_text_content=message_body,
+        )
 
         try:
-            send_mail(
-                subject,
-                message_body,
-                settings.DEFAULT_FROM_EMAIL,
-                [admin_email],
-                fail_silently=False,
-            )
+            # Sending email using SendGrid API
+            response = sg.send(message)
+            
             messages.success(request, 'Your message has been sent successfully!')
             return redirect('store:contact')
         except Exception as e:
+            
             messages.error(request, f'There was an error sending your message: {str(e)}')
             return redirect('store:contact')
     else:
@@ -599,14 +645,27 @@ def contact(request):
 
 
 
+# Deactivate SSL certificate verification (not recommended for production)
+ssl._create_default_https_context = ssl._create_unverified_context
 
-# Email testing
+# Use SendGrid API client for sending emails
+sg = sendgrid.SendGridAPIClient(api_key=os.getenv("SENDGRID_API_KEY"))
+
+
+
+
+
+
+
+
+# Email testing SMTP with SendGrid and APY Key
 def test_email(request):
+    sg = SendGridAPIClient(os.getenv("SENDGRID_API_KEY"))
     message = Mail(
-        from_email="iuliansami@gmail.com",  # Adresa de expeditor
-        to_emails="iuliansami@gmail.com",  # Adresa de destinatar
+        from_email="iuliansami@gmail.com",  
+        to_emails="iuliansami@gmail.com",  
         subject="Test Email via SendGrid",
-        plain_text_content="Text message sent from Django with SendGrid.",
+        plain_text_content="Email trimis prin SendGrid API din Django.",
     )
     
     try:
@@ -725,3 +784,7 @@ def faq_view(request):
 # Payment methods page view
 def payment_methods(request):
     return render(request, 'store/payment_methods.html')
+
+
+
+

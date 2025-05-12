@@ -102,7 +102,7 @@ class Order(models.Model):
     total_price = models.DecimalField(max_digits=10, decimal_places=2)  # Total price of the order
     created_at = models.DateTimeField(auto_now_add=True)  # Order creation time
     updated_at = models.DateTimeField(auto_now=True)  # Last time the order was updated
-    # items = models.ManyToManyField('CartItem')  # Items included in the order
+    #items = models.ManyToManyField('CartItem')  # Items included in the order
 
     def __str__(self):
         return f"Order {self.id} - {self.user.username}"  # String representation of the order

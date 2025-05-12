@@ -3,6 +3,11 @@ from django.utils.translation import gettext_lazy as _  # Import translation uti
 from django.utils.html import format_html  # Import HTML formatting utility
 from .models import Product, Category, Cart, CartItem, Profile, Review, NewsletterSubscriber  # Import the models to register them in the admin panel
 
+from django.contrib.auth.models import Group  # Import Group model
+from django.contrib.auth.admin import GroupAdmin  # Import GroupAdmin for custom admin interface
+from django.contrib import admin  # Import admin module for admin interface
+
+
 # Custom filter for stock status
 class StockFilter(admin.SimpleListFilter):
     title = _('Stock Status')  # Title of the filter in the admin panel
@@ -111,3 +116,16 @@ class ReviewAdmin(admin.ModelAdmin):
 class NewsletterSubscriberAdmin(admin.ModelAdmin):
     list_display = ('email', 'subscribed_at')  # afișează coloane în admin
     search_fields = ('email',)
+
+
+# Unregister + Register Group model in admin panel / see members of group
+class CustomGroupAdmin(GroupAdmin):
+    def users_in_group(self, obj):
+        return ", ".join(user.username for user in obj.user_set.all())
+    users_in_group.short_description = "Users"
+
+    list_display = ('name', 'users_in_group')
+
+# Unregister the default Group admin and register the custom one
+admin.site.unregister(Group)
+admin.site.register(Group, CustomGroupAdmin)

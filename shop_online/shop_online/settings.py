@@ -177,17 +177,30 @@ SESSION_COOKIE_AGE = 3600  # 60 minutes (1800 seconds = 30 minutes) session expi
 # This line means : sesion expire when browser close
 SESSION_EXPIRE_AT_BROWSER_CLOSE = True
 
+
+
+
 from dotenv import load_dotenv # Load environment variables from .env file
 load_dotenv()  # Load variables from .env
 
 WEATHER_API_KEY = os.getenv('WEATHER_API_KEY')  # Obține cheia API
 
-# Send Contact Message directly to ADMINs email address:
+# Send Contact Message directly to ADMINs email address:  SMTP 
 #EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend' # for local development
-EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"  # Folosim backend-ul SMTP standard
-EMAIL_HOST = 'smtp.sendgrid.net'  # Server-ul SMTP al SendGrid
-EMAIL_PORT = 587  # Portul 587 pentru TLS
-EMAIL_USE_TLS = True  # Activăm TLS
-EMAIL_HOST_USER = 'apikey'  # Userul este "apikey" pentru SendGrid
-EMAIL_HOST_PASSWORD = os.getenv('SENDGRID_API_KEY')  # Cheia ta API SendGrid
-DEFAULT_FROM_EMAIL = 'iuliansami@gmail.com'  # Adresa de expeditor
+# EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"  # Folosim backend-ul SMTP standard
+# EMAIL_HOST = 'smtp.sendgrid.net'  # Server-ul SMTP al SendGrid
+# EMAIL_PORT = 587  # Portul 587 pentru TLS
+# EMAIL_USE_TLS = True  # Activăm TLS
+# EMAIL_HOST_USER = 'apikey'  # Userul este "apikey" pentru SendGrid
+# EMAIL_HOST_PASSWORD = os.getenv('SENDGRID_API_KEY')  # Cheia ta API SendGrid
+# DEFAULT_FROM_EMAIL = 'iuliansami@gmail.com'  # Adresa de expeditor
+
+
+
+
+# Send Contact Message directly to ADMINs email address:  API KEY
+# Sendgrid key for sending emails
+SENDGRID_API_KEY = os.getenv("SENDGRID_API_KEY")
+
+# Optional settings for SendGrid
+DEFAULT_FROM_EMAIL = "iuliansami@gmail.com"

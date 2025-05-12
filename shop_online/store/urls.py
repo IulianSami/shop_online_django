@@ -35,6 +35,7 @@ urlpatterns = [
     path('terms-and-conditions/', views.terms_and_conditions_view, name='terms_and_conditions'),
     path('faq/', views.faq_view, name='faq'),
     path('payment-methods/', views.payment_methods, name='payment_methods'),
+    path('history_of_orders/', views.history_of_orders, name='history_of_orders'),
     
     
     

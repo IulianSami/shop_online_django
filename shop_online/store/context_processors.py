@@ -1,4 +1,4 @@
-# store/context_processors.py
+# store/context_processors.py   (for red dott with number of items in cart)
 from .models import Cart, CartItem
 
 def cart_item_count(request):
