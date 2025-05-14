@@ -5,6 +5,23 @@
 {% block content %}
   <div class="terms-container">
     <h1>Agree to the Terms and Conditions</h1>
+
+    <p>
+      By agreeing to the terms and conditions, you acknowledge that you have read, understood, and agreed to abide by the following terms, which govern your use of our online store. These terms outline your rights, obligations, and restrictions when using the services provided by our store. We reserve the right to update or change these terms at any time, and it is your responsibility to stay informed of any changes.
+    </p>
+
+    <p>
+      The content on our website, including text, graphics, logos, and images, is protected by copyright law and may not be reproduced or used without permission. Our store also collects personal data, and we are committed to protecting your privacy in accordance with our privacy policy.
+    </p>
+
+    <p>
+      By using this website, you agree to provide accurate and up-to-date information and to comply with all applicable laws and regulations. Any fraudulent activity or misuse of our services may result in the termination of your account.
+    </p>
+
+    <p>
+      Please review our <a href="{% url 'store:terms_and_conditions' %}">full Terms and Conditions</a> for a detailed description of the terms that govern your use of our site. If you have any questions or concerns, feel free to contact us.
+    </p>
+
     <form method="post" action="{% url 'store:agree_terms_and_conditions' %}">
         {% csrf_token %}
         {{ form.as_p }}  
